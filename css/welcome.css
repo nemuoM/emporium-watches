@@ -1,0 +1,29 @@
+.welcome-container {
+    margin: auto;
+    width: 700px;
+    text-align: center;
+    padding: 50px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+h1 {
+    color: #333;
+}
+
+.btn{
+    background-color: #e0cda9;
+    padding: 20px;
+}
+.btn:hover{
+    background-color: #ccba99;
+}
+
+.mtitre{
+    font-family: "conso bold";
+    margin-bottom: 60px;
+}
+.mtexte{
+    font-family: "conso bold";
+    margin-bottom: 30px;
+}

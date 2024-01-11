@@ -1,0 +1,109 @@
+.formulaire {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Ajouté pour s'assurer que .formulaire occupe toute la largeur */
+}
+
+.formulaire img {
+    width: 100%;
+    display: block; /* Assurez-vous que l'image n'a pas d'espace autour d'elle */
+}
+
+.mignon {
+    position: absolute; /* Positionnement absolu par rapport à .formulaire */
+    top: 40%; /* Ajustement pour centrer verticalement */
+    left: 30%; /* Ajustement pour centrer horizontalement */
+    transform: translate(-50%, -50%); /* Ajustement pour centrer précisément */
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.7
+    ); /* Utilisation de RGBA pour l'opacité */
+    width: 650px; /* Largeur fixe, ajustez selon vos besoins */
+    padding: 50px 50px 20px; /* Padding ajusté */
+    border-radius: 45px;
+    border-style: groove;
+    border-color: #e0cda9;
+}
+
+.popo {
+    color: whitesmoke;
+    font-family: "conso";
+}
+.popod {
+    font-family: "conso";
+    color: whitesmoke;
+    margin-left: 35px;
+}
+
+.inputi {
+    margin-left: 15px;
+}
+
+.zoni {
+    border-radius: 40px;
+    border-color: #e0cda9;
+    border-width: 3px;
+}
+.zoni:focus {
+    border-color: #e0cda9;
+}
+
+.btn {
+    margin-right: 20px;
+    margin-top: 20px;
+    border-radius: 50px;
+}
+
+.texti {
+    color: #e0cda9;
+    text-decoration: none;
+    margin-left: 20px;
+}
+.texti:hover {
+    text-decoration: underline;
+}
+
+.form-check-input:checked {
+    background-color: #e0cda9;
+    border-color: #c2b191;
+}
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px; /* Largeur fixe de 300 pixels */  
+  }
+  
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,39 @@
+# Turn rewrite engine on
+Options +FollowSymlinks
+RewriteEngine on
+
+# map neat URL to internal URL
+RewriteRule ^info/$     index.php?controller=view&action=information [nc]
+
+RewriteRule ^panier/$   index.php?controller=view&action=panier [nc]
+RewriteRule ^panier/affiche/$   index.php?controller=cart&action=afficheCart [nc]
+RewriteRule ^panier/del/([0-9]+)/$     index.php?controller=cart&action=delMontre&id=$1 [nc,qsa]
+RewriteRule ^panier/addQte/([0-9]+)/$     index.php?controller=cart&action=addCart&id=$1 [nc,qsa]
+RewriteRule ^panier/decrQte/([0-9]+)/$     index.php?controller=cart&action=decrQte&id=$1 [nc,qsa]
+
+RewriteRule ^montres/addCart/([0-9]+)/$     index.php?controller=cart&action=addCart&id=$1 [nc,qsa]
+RewriteRule ^montres/detail/([0-9]+)/addCart/([0-9]+)/$     index.php?controller=cart&action=addCart&id=$1 [nc,qsa]
+
+RewriteRule ^reset/$    index.php?controller=reinitilize [nc]
+
+RewriteRule ^espace-membre/$    index.php?controller=client&action=espaceMembre [nc]
+RewriteRule ^espace-membre/inscription/$   index.php?controller=client&action=inscription [nc]
+RewriteRule ^espace-membre/login/$    index.php?controller=client&action=seconnecter [nc]
+
+RewriteRule ^login/$    index.php?controller=client&action=seconnecter [nc]
+RewriteRule ^deconnexion/$   index.php?controller=client&action=deconnexion [nc]
+
+RewriteRule ^profil/$   index.php?controller=view&action=monProfil [nc]
+RewriteRule ^bienvenue/$    index.php?controller=view&action=bienvenue [nc]
+
+RewriteRule ^montres/$      index.php?controller=montre&action=montres [nc]
+RewriteRule ^montres/affiche/$     index.php?controller=montre&action=affichepdt [nc]
+RewriteRule ^montres/marque/$       index.php?controller=montre&action=afficheMarque [nc]
+RewriteRule ^montres/genre/$       index.php?controller=montre&action=afficheGenre [nc]
+RewriteRule ^montres/couleur/$       index.php?controller=montre&action=afficheCouleur [nc]
+RewriteRule ^montres/style/$       index.php?controller=montre&action=afficheStyle [nc]
+RewriteRule ^montres/mouvement/$       index.php?controller=montre&action=afficheMouvement [nc]
+RewriteRule ^montres/matiere/$       index.php?controller=montre&action=afficheMatiere [nc]
+
+RewriteRule ^montres/detail/([0-9]+)/$       index.php?controller=montre&action=detailMontre [nc]
+RewriteRule ^montres/detail/([0-9]+)/lamontre/([0-9]+)/$     index.php?controller=montre&action=maMontre&id=$1 [nc,qsa]

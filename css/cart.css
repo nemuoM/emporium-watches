@@ -1,0 +1,107 @@
+.quantity-selector {
+    height: 10px;
+    width: 100px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.quantity-buttons {
+    display: flex;
+    gap: 5px;
+}
+.moins {
+    width: 15px;
+    margin-left: -4px;
+    margin-bottom: 29px;
+}
+
+.quantity-btn {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    background: white;
+    border-radius: 4px;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.quantity-display {
+    width: 40px;
+    text-align: center;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.card {
+    height: 170px;
+    width: 800px;
+    position: relative;
+    border-color: #e0cda9;
+    margin-bottom: 20px;
+}
+
+.cross-icon {
+    position: absolute;
+    position: relative;
+    width: 15px; /* ou la taille souhaitée */
+    height: 15px; /* ou la taille souhaitée */
+}
+.cross-button {
+    background-color: transparent;
+    position: absolute;
+    border: 0px solid transparent;
+    width: 20px;
+    height: 20px;
+    margin-left: 770px;
+}
+
+.cartimg {
+    width: 165px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1200px;
+    margin-top: 221px;
+}
+
+#monCart {
+    flex-grow: 1;
+}
+
+.order-summary {
+    width: 660px; /* Réduisez la largeur selon vos besoins */
+    height: 170px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-left: 20px; /* Espacement entre les produits et le résumé de la commande */
+}
+
+#total-amount {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+#validate-cart {
+    width: 100%;
+    padding: 10px;
+    background-color: #e0cda9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.rien {
+    font-family: "conso bold";
+    margin-top: 15%;
+    margin-bottom: 16%;
+}

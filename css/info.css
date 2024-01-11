@@ -1,0 +1,68 @@
+#vertical-line {
+    width: 3px;
+    height: 46px;
+    background-color: black;
+}
+#vertical-line2 {
+    width: 3px;
+    height: 30px;
+    background-color: black;
+}
+#vertical-line3 {
+    width: 3px;
+    height: 40px;
+    background-color: black;
+    margin-top: 20px;
+}
+
+#vertical-line4 {
+    width: 3px;
+    height: 25px;
+    background-color: black;
+    margin-top: 98px;
+}
+
+#vertical-line5 {
+    width: 3px;
+    height: 50px;
+    background-color: black;
+    margin-top: 120px;
+}
+
+#vertical-line6 {
+    width: 3px;
+    height: 25px;
+    background-color: black;
+    margin-top: 108px;
+}
+
+#vertical-line7 {
+    width: 3px;
+    height: 25px;
+    background-color: black;
+    margin-top: 85px;
+}
+
+#vertical-line8 {
+    width: 3px;
+    height: 23px;
+    background-color: black;
+    margin-top: 87px;
+}
+
+.top {
+    margin-top: 20px;
+}
+
+.conso {
+    font-family: "Conso";
+}
+.histoire {
+    padding-top: 30px;
+}
+.savoir {
+    padding-top: 40px;
+}
+.rela {
+    padding-top: 50px;
+}
