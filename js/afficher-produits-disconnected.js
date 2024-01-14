@@ -25,7 +25,7 @@ function AfficherMontre(filtres) {
                                 href="detail/${data[i].idMontre}/"
                                 >
                                 <img
-                                src="${data[i].image}"
+                                src="../../../../img/montre/${data[i].image}"
                                 class="card-img-top"
                                 alt="${data[i].nom}"
                                 />
