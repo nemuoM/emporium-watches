@@ -256,7 +256,7 @@ INSERT INTO `style` (`libelle`) VALUES ('Vintage'), ('Classique'), ('Moderne'), 
 INSERT INTO `mouvement` (`libelle`) VALUES ('Quartz'), ('Automatique'), ('Mécanique'), ('Kinetic'), ('Solaire'), ('Pile');
 INSERT INTO `matiere` (`libelle`) VALUES ('Acier inoxydable'), ('Cuir'), ('Résine'), ('Silicone'), ('Nylon'), ('Acier'), ('Caoutchouc'), ('Verre en résine'), ('Verre minéral'), ('Verre saphir'), ('Fibre de carbone');
 
-INSERT INTO `statut`(`libelle`) VALUES ('Non Validée'), ('Préparation'), ('Pris en Charge'), ('En cours d''acheminement'), ('Livré');
+INSERT INTO `statut`(`libelle`) VALUES ('Non Validée'), ('Préparation'), ('Pris en Charge'), ('En cours d''acheminement'), ('Livré'), ('Annulé');
 
 INSERT INTO `montre`(`image`,`nom`, `description`, `prix`, `dateAjout`, `stock`, `idMarque`, `idGenre`, `idCouleur`, `idStyle`, `idMouvement`, `idMatiereCadran`, `idMatiereBracelet`) 
 VALUES 

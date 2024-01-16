@@ -35,7 +35,7 @@ function afficheCart() {
                             <div class="row g-0">
                                 <div class="col-md-4 cartimg">
                                     <img
-                                        src="${data[i].image}"
+                                        src="../../../../img/montre/${data[i].image}"
                                         class="img-fluid rounded-start cartimg"
                                         alt="..."
                                     />
