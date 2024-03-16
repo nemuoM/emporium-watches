@@ -50,36 +50,6 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
             >
-                Prix
-            </button>
-            <ul class="dropdown-menu">
-                <div class="row">
-                    <div class="col">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Min</span>
-                            </div>
-                            <input type="number" class="form-control" id="min-price" name="min-price" min="0" placeholder="0 €">
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Max</span>
-                            </div>
-                            <input type="number" class="form-control" id="max-price" name="max-price" min="0" placeholder="100 €">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <div class="btn-group">
-            <button
-                type="button"
-                class="btn btn-sable dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-            >
                 Couleur
             </button>
             <ul class="dropdown-menu" id="couleur">
