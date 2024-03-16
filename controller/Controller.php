@@ -8,9 +8,11 @@
  * @date 09/2023
  */
 
- class Controller {
+class Controller {
     public static function render($view, $param){
         extract($param);
         require_once $view;
     }
- }
+}
+
+?>

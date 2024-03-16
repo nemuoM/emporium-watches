@@ -9,7 +9,7 @@
  * @date 12/2023
  */
 
- class ClientController extends Controller {
+class ClientController extends Controller {
 
     /**
      * Nettoie les données entrantes pour éviter les attaques comme l'injection SQL et le cross-site scripting.
@@ -54,13 +54,10 @@
             $mdp = self::nettoyer($_POST['mdp']);
 
             $message = ClientManager::connexion($identifiant, $mdp);
-
-
-        }else {
+        } else {
             $message = 'Veuillez remplir tous les champs';
         }
 
-        
         $view = ROOT.'/view/espace-membre.php';
         $params = array();
         $params['message'] = $message;
@@ -109,41 +106,36 @@
             $mdpconfirm = self::nettoyer($_POST['confirm']);
 
             if($mdp === $mdpconfirm){
-            // Met en minuscule l'email
-            $adressemail = strtolower($adressemail);
+                // Met en minuscule l'email
+                $adressemail = strtolower($adressemail);
 
-            // Met en majuscule la première lettre du prénom
-            if(strpos($prenom, "-") !== false) {
-                $prenoms = explode('-', $prenom);
-                foreach ($prenoms as &$lePrenom) {
-                  $lePrenom = ucfirst($lePrenom);
+                // Met en majuscule la première lettre du prénom
+                if(strpos($prenom, "-") !== false) {
+                    $prenoms = explode('-', $prenom);
+                    foreach ($prenoms as &$lePrenom) {
+                      $lePrenom = ucfirst($lePrenom);
+                    }
+                    $prenom = implode('-', $prenoms);
+                } else {
+                    $prenom = ucfirst($prenom);
                 }
-                $prenom = implode('-', $prenoms);
-            } else {
-                $prenom = ucfirst($prenom);
-            }
 
-            // Met en majuscule le nom de famille
-            $nom = strtoupper($nom);
+                // Met en majuscule le nom de famille
+                $nom = strtoupper($nom);
 
                 ClientManager::addClient($prenom, $nom, $genreselect, $adressemail, $mdp);
-                
             } else {
                 $message = 'Les mots de passe ne sont pas identiques';
             }
-            
         } else {
             $message = 'Veuillez remplir tous les champs';
         }
 
-        
         $view = ROOT.'/view/espace-membre.php';
         $params = array();
         $params['message'] = $message;
         self::render($view, $params);
     }
-
-
- }
+}
 
 ?>

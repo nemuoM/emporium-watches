@@ -1,7 +1,6 @@
 <?php
-
-    $title = 'Mon Panier';
-    require_once 'header.php';
+$title = 'Mon Panier';
+require_once 'header.php';
 
 ?>
 
@@ -23,6 +22,6 @@
 
 <?php
 
-    require_once 'footer.php';
+require_once 'footer.php';
 
 ?>

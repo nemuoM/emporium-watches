@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * /index.php
@@ -8,72 +8,63 @@
  * @date 11/2023 
  */
 
- // enregistrement de la racine du site
- define ('SERVER_URL', "../../../..");
- define ('ROOT', __DIR__);
- define ('DEFAULT_CONTROLLER', 'view');
- define ('DEFAULT_ACTION', 'accueil');
+// Enregistrement de la racine du site
+define('SERVER_URL', "../../../..");
+define('ROOT', __DIR__);
+define('DEFAULT_CONTROLLER', 'view');
+define('DEFAULT_ACTION', 'accueil');
 
- //autochargement des class
-require_once ROOT.'/autoload.php';
+// Autochargement des classes
+require_once ROOT . '/autoload.php';
 session_start();
 
-//récupère les paramètre de l'url
-if(isset($_GET) && !empty($_GET)){
-    //extrait les valeurs du $_GET
+// Récupère les paramètres de l'URL
+if (isset($_GET) && !empty($_GET)) {
+    // Extrait les valeurs du $_GET
     extract($_GET);
-}else{
-    //si il n'en a pas alors c'est la page par défaut
+} else {
+    // Si aucun paramètre n'est passé, utilise les valeurs par défaut
     $controller = DEFAULT_CONTROLLER;
     $action = DEFAULT_ACTION;
 }
 
-if($controller == 'reinitilize'){
+// Si l'utilisateur veut réinitialiser, effectue la réinitialisation de la base de données
+if ($controller == 'reinitilize') {
     require_once 'model/DbManager.php';
     DbManager::reset();
     header('Location: /');
     exit();
 }
 
-//si il y a des paramètres en + de controller et action: 
-//ils sont stockés dans un array nommé $params
+// Si des paramètres supplémentaires sont présents dans l'URL (autres que controller et action),
+// ils sont stockés dans un tableau nommé $params
 $params = array();
-foreach($_GET as $key=>$value){
-    if(($key != 'controller') && ($key != 'action')){
+foreach ($_GET as $key => $value) {
+    if (($key != 'controller') && ($key != 'action')) {
         $params[$key] = $value;
     }
 }
 
-//test la bonne lecture des paramètres $_GET
-// print_r($controller);
-//print_r($action);
-foreach($params as $key=>$value){
-    //print_r('<br />'.$key.'=>'.$value);
-}
-
-// route vers le controller et l'action
-// vérifie que le controller requeté existe
-// sinon page d'erreur
-//idem pour l'action
-$controller .= 'Controller'; //la variable controller ne contenait qu'une partie du nom du fichier, on le complète
-$filename = ROOT.'/controller/'.$controller.'.php';
-//print_r('filename = '.$filename);
-if(file_exists($filename)){
-    // le fichier  du controller existe
-    // inclut le fichier de class du controller 
-    require_once ROOT.'/controller/'.$controller.'.php';
-    if(method_exists($controller,$action)){
-        // appelle la méthode correspondant à l'action
-        // si dans l'url, en plus des paramètres controller et action, il y a d'autres paramètres alors ils doivent être passés au controller
+// Route vers le contrôleur et l'action
+// Vérifie si le contrôleur demandé existe, sinon affiche une page d'erreur
+// Vérifie si l'action demandée existe dans le contrôleur, sinon affiche une page d'erreur
+$controller .= 'Controller'; // Complète le nom du contrôleur
+$filename = ROOT . '/controller/' . $controller . '.php';
+if (file_exists($filename)) {
+    // Le fichier du contrôleur existe
+    // Inclut le fichier de classe du contrôleur 
+    require_once ROOT . '/controller/' . $controller . '.php';
+    if (method_exists($controller, $action)) {
+        // Appelle la méthode correspondant à l'action
+        // Si d'autres paramètres sont présents dans l'URL, ils doivent être passés au contrôleur
         $controller::$action($params);
-    }else{
-        // la méthode correspondant à l'action n'exite pas 
-        header('Location: '.SERVER_URL.'/erreur/');
+    } else {
+        // La méthode correspondant à l'action n'existe pas 
+        header('Location: ' . SERVER_URL . '/erreur/');
     }
-}else {
-    //le fichier du controller n'exite pas
-    header('Location: '.SERVER_URL.'/erreur/');
+} else {
+    // Le fichier du contrôleur n'existe pas
+    header('Location: ' . SERVER_URL . '/erreur/');
 }
-
 
 ?>

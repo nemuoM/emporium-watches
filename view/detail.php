@@ -12,14 +12,11 @@
 </div>
 
 <?php if(isset($_SESSION['idClient'])) {?>
-<script src="<?= SERVER_URL ?>/js/details-connected.js"></script>
+    <script src="<?= SERVER_URL ?>/js/details-connected.js"></script>
 <?php } else {?>
-<script src="<?= SERVER_URL ?>/js/details-disconnected.js"></script>
+    <script src="<?= SERVER_URL ?>/js/details-disconnected.js"></script>
 <?php } ?>
 
-
-
-
 <?php
-require_once 'footer.php';
+    require_once 'footer.php';
 ?>

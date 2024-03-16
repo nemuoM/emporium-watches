@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * /controller/ViewController.php
@@ -56,6 +56,4 @@ class ViewController extends Controller {
         $params = array();
         self::render($view, $params);
     }
-
-    
-}
+} 

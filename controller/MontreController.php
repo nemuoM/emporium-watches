@@ -1,4 +1,5 @@
 <?php
+
 /**
  * /controller/MontreController.php
  * 
@@ -8,7 +9,7 @@
  * @date 11/2023
  */
 
- class MontreController extends Controller{
+class MontreController extends Controller{
 
     /**
      * Affiche la page principale des montres.
@@ -74,6 +75,7 @@
         $params = array();
         self::render($view, $params);
     }
+    
     /**
      * Gère une requête GET pour récupérer le détail d'une montre spécifique par son identifiant.
      * Utilise ProductManager::getMontreById pour récupérer et afficher les informations de la montre.
@@ -100,40 +102,35 @@
      */
     public static function afficheMarque($params){
         if ($_SERVER['REQUEST_METHOD']==='GET'){
-
             echo ProductManager::getMarque();
         }
     }
     public static function afficheGenre($params){
         if ($_SERVER['REQUEST_METHOD']==='GET'){
-            
             echo ProductManager::getGenre();
         }
     }
     public static function afficheCouleur($params){
         if ($_SERVER['REQUEST_METHOD']==='GET'){
-            
             echo ProductManager::getCouleur();
         }
     }
     public static function afficheStyle($params){
         if ($_SERVER['REQUEST_METHOD']==='GET'){
-            
             echo ProductManager::getStyle();
         }
     }
     public static function afficheMouvement($params){
         if ($_SERVER['REQUEST_METHOD']==='GET'){
-            
             echo ProductManager::getMouvement();
         }
     }
     public static function afficheMatiere($params){
         if ($_SERVER['REQUEST_METHOD']==='GET'){
-            
             echo ProductManager::getMatiere();
         }
     }
 
-    
- }
+}
+
+?>

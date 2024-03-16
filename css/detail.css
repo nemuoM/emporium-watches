@@ -29,9 +29,8 @@
 .img-montre {
     border: 1px solid;
     border-radius: 10px;
-    width: 100%;      /* Permet à l'image de remplir la largeur de la div */
-    height: 100%;     /* Permet à l'image de remplir la hauteur de la div */
+    width: 100%; /* Permet à l'image de remplir la largeur de la div */
+    height: 100%; /* Permet à l'image de remplir la hauteur de la div */
     object-fit: cover; /* Ajuste l'image pour couvrir tout l'espace disponible, en conservant ses proportions */
-    box-shadow: 0px 10px 20px rgb(0, 0, 0,0.1);
+    box-shadow: 0px 10px 20px rgb(0, 0, 0, 0.1);
 }
-

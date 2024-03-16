@@ -9,10 +9,10 @@
  * @date 12/2023
  */
 
- class ClientController extends Controller {
+class ClientController extends Controller {
 
     //A COMPLÉTER
     
- }
+}
 
 ?>

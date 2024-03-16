@@ -1,15 +1,12 @@
 <?php
-
-    $title = 'Nos Montres';
-    require_once 'header.php';
-
+$title = 'Nos Montres';
+require_once 'header.php';
 ?>
 
 <link rel="stylesheet" href="<?= SERVER_URL ?>/css/style-pdt.css" />
 
-<div id="errorModal" class="modal">
+<div class="modal" id="errorModal">
   <div class="modal-content">
-    <span class="close">&times;</span>
     <p id="errorMessage"></p>
   </div>
 </div>
@@ -17,17 +14,17 @@
 <div class="container center pdts mx-auto">
     <div class="filtres">
         <div class="btn-group">
-        <button
-            type="button"
-            class="btn btn-sable dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-        >
-            Marque
-        </button>
-        <ul class="dropdown-menu" id="marque">
-            
-        </ul>
+            <button
+                type="button"
+                class="btn btn-sable dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                Marque
+            </button>
+            <ul class="dropdown-menu" id="marque">
+                
+            </ul>
         </div>
     
         <div class="btn-group">
@@ -128,10 +125,9 @@
 <?php } else {?>
 <script src="<?= SERVER_URL ?>/js/afficher-produits-disconnected.js"></script>
 <?php } ?>
+    <script src="<?= SERVER_URL ?>/js/addToCart.js"></script>
 
     
 <?php
-
-    require_once 'footer.php';
-
+require_once 'footer.php';
 ?>

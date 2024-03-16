@@ -1,9 +1,8 @@
 var modal = document.getElementById("errorModal");
 var span = document.getElementsByClassName("close")[0];
 
-function showError() {
-    document.getElementById("errorMessage").innerText =
-        "Votre commande à bien été ajouté au panier";
+function showError(msg) {
+    document.getElementById("errorMessage").innerText = msg;
     modal.style.display = "block";
 }
 
@@ -24,7 +23,7 @@ function addToCart(id) {
             }
             return response.json();
         })
-        .then(showError())
+        .then(showError("Ce produit a bien été ajouté à votre panier !"))
         .catch((error) => {
             console.error("Erreur :", error);
         });

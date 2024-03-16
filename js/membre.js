@@ -171,7 +171,7 @@ var span = document.getElementsByClassName("close")[0];
 
 function showError() {
     document.getElementById("errorMessage").innerText =
-        "Votre commande à bien été ajouté au panier";
+        "Erreur lors de la connexion ! Veuillez réessayer !";
     modal.style.display = "block";
 }
 

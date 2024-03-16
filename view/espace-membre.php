@@ -1,18 +1,15 @@
 <?php
-
     $title = 'Espace membre';
     require_once 'header.php';
-
 ?>
 <link rel="stylesheet" href="<?= SERVER_URL ?>/css/espace-ew.css" />
 
 <div id="errorModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p id="errorMessage"></p>
-  </div>
+    <div class="modal-content">
+        <span class="close"></span>
+        <p id="errorMessage"></p>
+    </div>
 </div>
-
 
 <div class="formulaire">
     <img src="<?= SERVER_URL ?>/img/EW-form.png" alt="photo du formulaire" />
@@ -39,16 +36,13 @@
                     />
                     <label for="floatingPassword">Mot de passe</label>
                 </div>
-                <a id="change-form-link" class="texti" href="#"
-                    >Pas encore inscrit ?</a
-                >
+                <a id="change-form-link" class="texti" href="#">Pas encore inscrit ?</a>
                 <div class="mt-auto d-flex justify-content-end">
                     <button type="submit" class="btn btn-light">Me connecter</button>
                 </div>
             </div>
         </form>
     </div>
-    
 </div>
 
 <script src="<?= SERVER_URL ?>/js/membre.js"></script>
@@ -57,7 +51,5 @@
 <?php
 }
 
-
-    require_once 'footer.php';
-
+require_once 'footer.php';
 ?>
