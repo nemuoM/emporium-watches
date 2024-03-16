@@ -282,5 +282,39 @@ VALUES
   ('casio-calculette.jpg', 'Casio Vintage DB', 'DATA BANK multilingue Cette montre numérique combinée à une calculatrice à 10 touches vous fait bénéficier de toute la commodité d''une calculatrice à 8 chiffres intégrée à une montre-bracelet. Son écran LCD à fort contraste facilite la lecture des chiffres. Parmi les autres fonctionnalités, citons le mode Banque de données, l''affichage du jour de la semaine en 13 langues et une autonomie de 10 ans garantissant un fonctionnement sans interruption.', 59.90, NOW(), RAND()*20, 8,3,4,1,6,3,1),
   ('seiko-plonge.jpg', 'Seiko Prospex', 'La montre automatique Prospex SPB147J1 est une ré-interprétation de la première montre Diver de 1965. Réalisée dans un acier inoxydable et étanche à 200 mètres, elle est la représentation parfaite du savoir-faire de la manufacture Seiko en matière de montres de plongée. Son joli cadran accueille des aiguilles et index revêtus de Lumibrite, son cadran est également recouvert d''un verre en saphir anti-reflet et entouré d''une lunette unidirectionnelle.', 990.0, NOW(), RAND()*20, 4,3,12,7,2,1,4);
 
-INSERT INTO `client` (`nom`,`prenom`,`mail`,`mdp`,`telephone`,`adresse`,`cp`, `ville`, `idGenre`, `idRole`) VALUES ('MORABET', 'Abdelmoumen', 'abdelmoumen.morabet@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 1);
+INSERT INTO `client` (`nom`,`prenom`,`mail`,`mdp`,`telephone`,`adresse`,`cp`, `ville`, `idGenre`, `idRole`) 
+VALUES ('MORABET', 'Abdelmoumen', 'abdelmoumen.morabet@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 1),
+       ('HAKIMI', 'Achraf', 'achraf.hakimi@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 3),
+       ('CURIE', 'Marie', 'marie.currie@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 3),
+       ('RONALDO', 'Cristiano', 'cristiano.ronaldo@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 3),
+       ('AKROUR', 'Nordine', 'akrour.nordine@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 2);
+
+
 INSERT INTO `commande` (`dateCmd`, `idStatut`, `idTransporteur`, `idClient`) VALUES (now(), 1, null, 1);
+
+INSERT INTO `commande` (`dateCmd`, `idStatut`, `idTransporteur`, `idClient`) 
+VALUES (now(), 1, null, 1),
+       ('2023-11-17', 3, 3, 2),
+       ('2023-12-25', 5, 4, 4),
+       ('2021-07-14', 6, 1, 3);
+
+INSERT INTO `details_montre` (`idCommande`, `idMontre`, `qte`) 
+VALUES (1, 1, 1),
+       (2, 16, 6),
+       (2, 7, 2),
+       (3, 18, 1),
+       (3, 6, 5),
+       (4, 11, 1),
+       (4, 20, 3),
+       (4, 15, 65);
+
+INSERT INTO `changement_statut` (`idCommande`, `idStatut`, `dateChangement`) 
+VALUES (2, 2, '2023-11-18'),
+       (2, 3, '2023-11-18'),
+       (3, 2, '2023-12-26'),
+       (3, 3, '2023-12-26'),
+       (3, 4, '2023-12-27'),
+       (3, 5, '2023-12-28'),
+       (4, 2, '2021-07-15'),
+       (4, 3, '2021-07-15'),
+       (4, 6, '2021-07-16');

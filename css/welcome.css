@@ -11,19 +11,19 @@ h1 {
     color: #333;
 }
 
-.btn{
+.btn {
     background-color: #e0cda9;
     padding: 20px;
 }
-.btn:hover{
+.btn:hover {
     background-color: #ccba99;
 }
 
-.mtitre{
+.mtitre {
     font-family: "conso bold";
     margin-bottom: 60px;
 }
-.mtexte{
+.mtexte {
     font-family: "conso bold";
     margin-bottom: 30px;
 }
