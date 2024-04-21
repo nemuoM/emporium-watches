@@ -234,6 +234,19 @@ BEGIN
 END &&
 DELIMITER ;
 
+DELIMITER $$
+CREATE TRIGGER update_statut_trigger
+AFTER UPDATE ON commande
+FOR EACH ROW
+BEGIN
+    IF NEW.idStatut <> OLD.idStatut THEN
+        INSERT INTO changement_statut (idCommande, idStatut, dateChangement)
+        VALUES (NEW.idCommande, NEW.idStatut, CURDATE());
+    END IF;
+END$$
+DELIMITER ;
+
+
 
 --
 -- Insertion des enregistrements

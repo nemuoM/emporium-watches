@@ -251,6 +251,131 @@
 
         return json_encode($data);
     }
- }
+
+    /**
+     * Obtenez les résultats de recherche en fonction d'un terme de recherche donné.
+     *
+     * @param string $search Le terme de recherche.
+     * @return string Résultats de recherche encodés en JSON.
+     */
+    public static function getSearch($search){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'SELECT idMontre, nom FROM montre WHERE nom LIKE :search';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':search', $search, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $data = null;
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $data[] = $row;
+            }
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+
+        return json_encode($data);
+    }
+
+    /**
+     * Insérez une nouvelle montre dans la base de données.
+     *
+     * @param array $montre Les données de la montre à insérer.
+     * @return void
+     */
+    public static function setMontre($montre){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'INSERT INTO montre (image, nom, prix, description, idMarque, idGenre, idCouleur, idStyle, idMouvement, idMatiereCadran, idMatiereBracelet) VALUES (:image, :nom, :prix, :description, :idMarque, :idGenre, :idCouleur, :idStyle, :idMouvement, :idMatiereCadran, :idMatiereBracelet)';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':image', $montre['image'], PDO::PARAM_STR);
+            $stmt->bindParam(':nom', $montre['nom'], PDO::PARAM_STR);
+            $stmt->bindParam(':prix', $montre['prix'], PDO::PARAM_INT);
+            $stmt->bindParam(':description', $montre['description'], PDO::PARAM_STR);
+            $stmt->bindParam(':idMarque', $montre['idMarque'], PDO::PARAM_INT);
+            $stmt->bindParam(':idGenre', $montre['idGenre'], PDO::PARAM_INT);
+            $stmt->bindParam(':idCouleur', $montre['idCouleur'], PDO::PARAM_INT);
+            $stmt->bindParam(':idStyle', $montre['idStyle'], PDO::PARAM_INT);
+            $stmt->bindParam(':idMouvement', $montre['idMouvement'], PDO::PARAM_INT);
+            $stmt->bindParam(':idMatiereCadran', $montre['idMatiereCadran'], PDO::PARAM_INT);
+            $stmt->bindParam(':idMatiereBracelet', $montre['idMatiereBracelet'], PDO::PARAM_INT);
+            $stmt->execute();
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+    }
+
+    /**
+     * Mettez à jour une montre existante dans la base de données.
+     *
+     * @param array $montre Les données de la montre mise à jour.
+     * @return void
+     */
+    public static function updateMontre($montre){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'UPDATE montre SET image = :image, nom = :nom, prix = :prix, description = :description, idMarque = :idMarque, idGenre = :idGenre, idCouleur = :idCouleur, idStyle = :idStyle, idMouvement = :idMouvement, idMatiereCadran = :idMatiereCadran, idMatiereBracelet = :idMatiereBracelet WHERE idMontre = :idMontre';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':image', $montre['image'], PDO::PARAM_STR);
+            $stmt->bindParam(':nom', $montre['nom'], PDO::PARAM_STR);
+            $stmt->bindParam(':prix', $montre['prix'], PDO::PARAM_INT);
+            $stmt->bindParam(':description', $montre['description'], PDO::PARAM_STR);
+            $stmt->bindParam(':idMarque', $montre['idMarque'], PDO::PARAM_INT);
+            $stmt->bindParam(':idGenre', $montre['idGenre'], PDO::PARAM_INT);
+            $stmt->bindParam(':idCouleur', $montre['idCouleur'], PDO::PARAM_INT);
+            $stmt->bindParam(':idStyle', $montre['idStyle'], PDO::PARAM_INT);
+            $stmt->bindParam(':idMouvement', $montre['idMouvement'], PDO::PARAM_INT);
+            $stmt->bindParam(':idMatiereCadran', $montre['idMatiereCadran'], PDO::PARAM_INT);
+            $stmt->bindParam(':idMatiereBracelet', $montre['idMatiereBracelet'], PDO::PARAM_INT);
+            $stmt->bindParam(':idMontre', $montre['idMontre'], PDO::PARAM_INT);
+            $stmt->execute();
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+    }
+
+    /**
+     * Supprimez une montre de la base de données.
+     *
+     * @param int $id L'ID de la montre à supprimer.
+     * @return void
+     */
+    public static function deleteMontre($id){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'DELETE FROM montre WHERE idMontre = :idMontre';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':idMontre', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+    }
+}
 
 ?>

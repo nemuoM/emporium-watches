@@ -8,10 +8,15 @@
  * @date 12/2023
  */
 
- class CartManager{
+class CartManager{
 
     private static ?\PDO $cnx = null;
 
+    /**
+     * Récupère le contenu du panier
+     * 
+     * @return string
+     */
     public static function getCart(){
         try{
             if(self::$cnx == null){
@@ -44,6 +49,12 @@
         return json_encode($data);  
     }
     
+    /**
+     * Synchronise le panier avec une commande existante
+     * 
+     * @param int $idC
+     * @return void
+     */
     public static function syncCart($idC){
         try{
             if(self::$cnx == null){
@@ -65,6 +76,11 @@
         }
     }
 
+    /**
+     * Crée un nouveau panier pour un client
+     * 
+     * @return void
+     */
     public static function createCart(){ 
         //création de son cart à l'inscription + qd il cmd ça valide et ça crée un nouveau cart aussi faire en sorte qu'a l'inscription on récup l'idClient
         try{
@@ -88,6 +104,12 @@
         }
     }
 
+    /**
+     * Ajoute une montre au panier
+     * 
+     * @param int $idMontre
+     * @return bool
+     */
     public static function addToCartM($idMontre){
         try{
             if(self::$cnx == null){
@@ -114,6 +136,12 @@
         }
     }
 
+    /**
+     * Supprime un produit du panier
+     * 
+     * @param int $idMontre
+     * @return bool
+     */
     public static function deleteProd($idMontre){
         try{
             if(self::$cnx == null){
@@ -140,6 +168,12 @@
         }
     }
 
+    /**
+     * Décrémente la quantité d'une montre dans le panier
+     * 
+     * @param int $idMontre
+     * @return bool
+     */
     public static function decrQuantity($idMontre){
         try{
             if(self::$cnx == null){
@@ -166,7 +200,123 @@
         }
     }
 
+    /**
+     * Récupère le statut de la commande
+     * 
+     * @return int
+     */
+    public static function getStatutCommande(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $id = $_SESSION['idCommande'];
 
- }
+            $sql = 'SELECT idStatut, dateChangement FROM changement_statut WHERE idCommande = :idC';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':idC', $id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $row = $stmt->fetch();
+
+            return $row['idStatut'];
+
+            unset($cnx);
+        }catch(PDOException $e){
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Définit le transporteur de la commande
+     * 
+     * @param int $idTransporteur
+     * @return bool
+     */
+    public static function setTransporteur($idTransporteur){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $id = $_SESSION['idCommande'];
+
+            $sql = 'UPDATE commande SET idTransporteur = :idT WHERE idCommande = :idC';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':idT', $idTransporteur, PDO::PARAM_INT);
+            $stmt->bindParam(':idC', $id, PDO::PARAM_INT);
+
+            if($stmt->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+            unset($cnx);
+        }catch(PDOException $e){
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Annule le panier en mettant à jour le statut de la commande.
+     *
+     * @return bool Retourne true si la mise à jour a réussi, sinon false.
+     * @throws PDOException En cas d'erreur lors de l'exécution de la requête SQL.
+     */
+    public static function cancelCart(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $id = $_SESSION['idCommande'];
+
+            $sql = 'UPDATE commande SET idStatut = 6 WHERE idCommande = :idC';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':idC', $id, PDO::PARAM_INT);
+
+            if($stmt->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+            unset($cnx);
+        }catch(PDOException $e){
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+
+    public static function confirmCart(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $id = $_SESSION['idCommande'];
+
+            $sql = 'UPDATE commande SET idStatut = 2 WHERE idCommande = :idC';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':idC', $id, PDO::PARAM_INT);
+
+            if($stmt->execute()){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+            unset($cnx);
+        }catch(PDOException $e){
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+
+
+}
 
 ?>

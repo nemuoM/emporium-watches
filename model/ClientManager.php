@@ -133,6 +133,86 @@ class ClientManager
             die('Erreur : ' . $e->getMessage());
         }
     }
+
+    /**
+     * Met à jour le mot de passe d'un client dans la base de données.
+     * 
+     * @param int $id L'identifiant du client.
+     * @param string $mdp Le nouveau mot de passe du client.
+     */
+    public static function updatePassword($id, $mdp)
+    {
+        try {
+            if (self::$cnx == null) {
+                self::$cnx = DbManager::getConnexion();
+            }
+            // Hash le mot de passe avec Bcrypt, via un coût de 10
+            $cost = ['cost' => 10];
+            $mdpHash = password_hash($mdp, PASSWORD_BCRYPT, $cost);
+
+            $sql = 'UPDATE client SET mdp = :mdp WHERE idClient = :id';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':mdp', $mdpHash, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            unset($cnx);
+        } catch (PDOException $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Met à jour les informations d'un client dans la base de données.
+     * 
+     * @param int $id L'identifiant du client.
+     * @param string $nom Le nouveau nom du client.
+     * @param string $prenom Le nouveau prénom du client.
+     * @param string $mail La nouvelle adresse e-mail du client.
+     * @param string $telephone Le nouveau numéro de téléphone du client.
+     * @param string $adresse La nouvelle adresse du client.
+     * @param string $cp Le nouveau code postal du client.
+     * @param string $ville La nouvelle ville du client.
+     * @param int $genre L'identifiant du nouveau genre du client.
+     */
+    public static function updateClient($id, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $genre)
+    {
+        try {
+            if (self::$cnx == null) {
+                self::$cnx = DbManager::getConnexion();
+            }
+
+            $sql = 'UPDATE client SET nom = :n, prenom = :p, mail = :m, telephone = :t, adresse = :a, cp = :c, ville = :v, idGenre = :g WHERE idClient = :id';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':n', $nom, PDO::PARAM_STR);
+            $stmt->bindParam(':p', $prenom, PDO::PARAM_STR);
+            $stmt->bindParam(':m', $mail, PDO::PARAM_STR);
+            $stmt->bindParam(':t', $telephone, PDO::PARAM_STR);
+            $stmt->bindParam(':a', $adresse, PDO::PARAM_STR);
+            $stmt->bindParam(':c', $cp, PDO::PARAM_STR);
+            $stmt->bindParam(':v', $ville, PDO::PARAM_STR);
+            $stmt->bindParam(':g', $genre, PDO::PARAM_INT);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            $_SESSION['nom'] = $nom;
+            $_SESSION['prenom'] = $prenom;
+            $_SESSION['mail'] = $mail;
+            $_SESSION['telephone'] = $telephone;
+            $_SESSION['adresse'] = $adresse;
+            $_SESSION['cp'] = $cp;
+            $_SESSION['ville'] = $ville;
+            $_SESSION['idGenre'] = $genre;
+
+            unset($cnx);
+        } catch (PDOException $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
 }
 
 ?>

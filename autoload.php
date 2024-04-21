@@ -31,6 +31,7 @@
  require_once ROOT.'/model/ProductManager.php';
  require_once ROOT.'/model/CartManager.php';
  require_once ROOT.'/model/ClientManager.php';
+ require_once ROOT.'/model/AvisManager.php';
 
  require_once ROOT.'/controller/Controller.php';
 
