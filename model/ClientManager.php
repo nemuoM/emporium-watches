@@ -62,7 +62,6 @@ class ClientManager
                     $_SESSION['nom'] = $nom;
                     $_SESSION['prenom'] = $prenom;
                     $_SESSION['mail'] = $mail;
-                    $_SESSION['mdpHash'] = $mdpHash;
                     $_SESSION['telephone'] = $telephone;
                     $_SESSION['adresse'] = $adresse;
                     $_SESSION['cp'] = $cp;
