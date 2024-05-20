@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-                © 2023 Emporium Watches
+                © 2024 Emporium Watches
             </div>
         </footer>
     </body>

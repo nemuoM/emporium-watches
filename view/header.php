@@ -22,8 +22,8 @@
 
     <div class="divbar mars">
         <form class="d-flex espace" role="search">
-        <input class="form-control me-2 rech" type="search" placeholder="Search" aria-label="Search">
-        <button class=" gnonmi pioupiou" type="submit">Rechercher</button>
+        <input class="form-control me-2 rech" type="search" placeholder="Rechercher" aria-label="Search">
+        <button class="gnonmi pioupiou" type="submit">Rechercher</button>
       </form>
         <div id="text">
             <li class="ha"><a href="<?= SERVER_URL ?>/">Accueil</a></li>
