@@ -77,6 +77,14 @@ li {
     margin-right: -122px;
 }
 
+.btn-sable {
+    background-color: #e0cda9;
+}
+
+.btn-sable:hover {
+    background-color: #e0cda9;
+}
+
 #espace-membre {
     display: flex;
     flex-direction: column;
