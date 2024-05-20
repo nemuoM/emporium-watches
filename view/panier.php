@@ -2,6 +2,10 @@
 $title = 'Mon Panier';
 require_once 'header.php';
 
+if(!isset($_SESSION['idClient'])){
+    header('Location: '.SERVER_URL.'/espace-membre/');
+}
+
 ?>
 
 <link rel="stylesheet" href="<?= SERVER_URL ?>/css/cart.css">
@@ -13,7 +17,7 @@ require_once 'header.php';
     <div class="order-summary row">
         <div id="total-amount">
         </div>
-        <button id="validate-cart">Valider mon panier</button>
+        <button id="validate-cart" onclick="window.location.href = '<?= SERVER_URL ?>/paiement/';">Valider mon panier</button>
     </div>
 </div>
 
