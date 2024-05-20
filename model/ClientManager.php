@@ -212,6 +212,35 @@ class ClientManager
             die('Erreur : ' . $e->getMessage());
         }
     }
+
+    public static function updateAdresse($id, $adresse, $cp, $ville, $telephone)
+    {
+        try {
+            if (self::$cnx == null) {
+                self::$cnx = DbManager::getConnexion();
+            }
+
+            $sql = 'UPDATE client SET adresse = :a, cp = :c, ville = :v, telephone = :t WHERE idClient = :id';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':a', $adresse, PDO::PARAM_STR);
+            $stmt->bindParam(':c', $cp, PDO::PARAM_STR);
+            $stmt->bindParam(':v', $ville, PDO::PARAM_STR);
+            $stmt->bindParam(':t', $telephone, PDO::PARAM_STR);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            $_SESSION['adresse'] = $adresse;
+            $_SESSION['cp'] = $cp;
+            $_SESSION['ville'] = $ville;
+            $_SESSION['telephone'] = $telephone;
+
+            unset($cnx);
+        } catch (PDOException $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
 }
 
 ?>
