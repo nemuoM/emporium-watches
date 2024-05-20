@@ -27,7 +27,8 @@ class CartManager{
             $sql = 'SELECT DM.idMontre, image, nom, prix, stock, qte, MA.libelle AS marque FROM montre MO ';
             $sql .= 'JOIN marque MA on MO.idMarque = MA.idMarque ';
             $sql .= 'JOIN details_montre DM on MO.idMontre = DM.idMontre ';
-            $sql .= 'WHERE idCommande = :idCo';
+            $sql .= 'JOIN commande CO on DM.idCommande = CO.idCommande ';
+            $sql .= 'WHERE CO.idCommande = :idCo AND idStatut = 1;';
 
             $stmt = self::$cnx->prepare($sql);
             $stmt->bindParam(':idCo', $idCo);
@@ -271,7 +272,7 @@ class CartManager{
             if(self::$cnx == null){
                 self::$cnx = DbManager::getConnexion();
             }
-            $id = $_SESSION['idCommande'];
+            $id = $_SESSION['idCommandeC'];
 
             $sql = 'UPDATE commande SET idStatut = 6 WHERE idCommande = :idC';
 
@@ -291,8 +292,17 @@ class CartManager{
         }
     }
 
-    public static function confirmCart(){
+    /**
+     * Confirme le panier en mettant à jour le statut de la commande.
+     * 
+     * @param string $adresse adresse du client
+     * @param string $codePostal code postal du client
+     * @param string $ville ville du client
+     * @param string $phone_number numéro de téléphone du client
+     */
+    public static function confirmCart($adresse, $codePostal, $ville, $phone_number){
         try{
+            ClientManager::updateAdresse($_SESSION['idClient'], $adresse, $codePostal, $ville, $phone_number);
             if(self::$cnx == null){
                 self::$cnx = DbManager::getConnexion();
             }
@@ -304,6 +314,8 @@ class CartManager{
             $stmt->bindParam(':idC', $id, PDO::PARAM_INT);
 
             if($stmt->execute()){
+                self::createCart(); // Move the createCart() call here
+                $_SESSION['idCommandeC'] = $id; // Create a session variable to store the idCommande
                 return true;
             }
             else{
@@ -314,6 +326,39 @@ class CartManager{
         }catch(PDOException $e){
             die('Erreur : ' . $e->getMessage());
         }
+    }
+
+    public static function getConfirmedCart(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $id = $_SESSION['idCommandeC'];
+
+            $sql = 'SELECT nom, prix, qte, MA.libelle AS marque FROM montre MO ';
+            $sql .= 'JOIN marque MA on MO.idMarque = MA.idMarque ';
+            $sql .= 'JOIN details_montre DM on MO.idMontre = DM.idMontre ';
+            $sql .= 'JOIN commande CO on DM.idCommande = CO.idCommande ';
+            $sql .= 'WHERE CO.idCommande = :idCo AND CO.idStatut = 2;';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':idCo', $id);
+            $stmt->execute();
+
+            $data = null;
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $data[] = $row;
+            }
+
+        }catch(PDOException $e){
+            die('Erreur : ' . $e->getMessage());
+        }
+        finally{
+            unset($cnx);
+        }
+
+        return json_encode($data);  
     }
 
 
