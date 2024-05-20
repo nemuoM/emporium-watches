@@ -56,4 +56,16 @@ class ViewController extends Controller {
         $params = array();
         self::render($view, $params);
     }
+
+    public static function paiement($params){
+        $view = ROOT.'/view/paiement.php';
+        $params = array();
+        self::render($view, $params);
+    }
+
+    public static function recapitulatif($params){
+        $view = ROOT.'/view/recapitulatif.php';
+        $params = array();
+        self::render($view, $params);
+    }
 } 

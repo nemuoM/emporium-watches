@@ -37,3 +37,11 @@ RewriteRule ^montres/matiere/$       index.php?controller=montre&action=afficheM
 
 RewriteRule ^montres/detail/([0-9]+)/$       index.php?controller=montre&action=detailMontre [nc]
 RewriteRule ^montres/detail/([0-9]+)/lamontre/([0-9]+)/$     index.php?controller=montre&action=maMontre&id=$1 [nc,qsa]
+
+RewriteRule ^paiement/$    index.php?controller=view&action=paiement [nc]
+RewriteRule ^paiement/valider/$    index.php?controller=cart&action=livraisonpaiement [nc]
+
+RewriteRule ^recapitulatif/$    index.php?controller=view&action=recapitulatif [nc]
+RewriteRule ^recapitulatif/watchrecap/$    index.php?controller=cart&action=getConfirmedCart [nc]
+
+RewriteRule ^recapitulatif/cancel/$    index.php?controller=cart&action=cancelCart [nc]
