@@ -34,8 +34,15 @@ function AfficherMontre(filtres) {
                                 <h5 class="card-title">${data[i].nom}</h5>
                                 <div class="minini">
                                 <p class="card-text">${data[i].prix} €</p>
-                                <a class="btn btn-sable fin" onclick="redirectToMemberSpace()">
-                                Ajouter au panier
+                                <a class="fin btn ${
+                                    data[i].stock === 0
+                                        ? 'btn-rouge" disabled'
+                                        : 'btn-sable" onclick="redirectToMemberSpace()"'
+                                } >${
+                        data[i].stock === 0
+                            ? "Rupture de stock"
+                            : `Ajouter au panier`
+                    }</a>
                                 </a>
                                 </div>
                                 </div>
