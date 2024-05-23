@@ -4,14 +4,13 @@
 }
 
 #livraisonpaiment {
-    display: flex;
-    justify-content: space-between; /* Distribute space evenly */
-    gap: 20px; /* Add space between the sections */
+    display: block;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 #livraison,
 #paiement {
-    /* Ensure both divs take equal space */
     flex: 1;
 }
 
@@ -21,7 +20,7 @@
 }
 
 #livraisonpaiment input[type="text"] {
-    width: 100%; /* Ensure the input fields take up the full width of their container */
+    width: 100%;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -29,15 +28,21 @@
 
 .valider {
     display: block;
-    margin: 40px auto; /* Center the button horizontally and add top margin */
+    margin: 40px auto;
     background-color: #e0cda9;
-    color: black; /* Set the text color */
-    padding: 10px 20px; /* Increase the button size */
-    border: none; /* Remove the button border */
-    border-radius: 5px; /* Round the button corners */
-    cursor: pointer; /* Show the pointer cursor on hover */
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .valider:hover {
-    background-color: #d0bd99; /* Add a hover effect */
+    background-color: #d0bd99;
+}
+
+.align {
+    display: flex;
+    justify-content: space-around;
+    gap: 50px;
 }

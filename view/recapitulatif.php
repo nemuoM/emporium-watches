@@ -19,8 +19,8 @@ require_once 'header.php'; // Inclusion de l'en-tête
                 Êtes-vous sûr de vouloir annuler votre commande ?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
                 <button type="button" onclick="cancelCart()" class="btn btn-success">Oui</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
             </div>
         </div>
     </div>
