@@ -258,31 +258,33 @@
      * @param string $search Le terme de recherche.
      * @return string Résultats de recherche encodés en JSON.
      */
-    public static function getSearch($search){
-        try{
-            if(self::$cnx == null){
+    public static function search($search) {
+        $search = '%' . $search . '%';
+        try {
+            if (self::$cnx == null) {
                 self::$cnx = DbManager::getConnexion();
             }
-            $sql = 'SELECT idMontre, nom FROM montre WHERE nom LIKE :search';
-
+            $sql = 'SELECT idMontre, nom FROM montre WHERE nom LIKE :s;';
+            
             $stmt = self::$cnx->prepare($sql);
-            $stmt->bindParam(':search', $search, PDO::PARAM_STR);
+            $stmt->bindValue(':s', $search, PDO::PARAM_STR);
             $stmt->execute();
+            
+            $data = [];
 
-            $data = null;
-
-            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $data[] = $row;
             }
-            
-        }catch (PDOException $e) {
-            die('Erreur : '. $e->getMessage());
-        }finally{
-            unset($cnx);
+        } catch (PDOException $e) {
+            die('Erreur : ' . $e->getMessage());
+        } finally {
+            self::$cnx = null;
         }
 
         return json_encode($data);
     }
+
+
 
     /**
      * Insérez une nouvelle montre dans la base de données.

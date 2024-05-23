@@ -131,6 +131,35 @@ class MontreController extends Controller{
         }
     }
 
+    public static function nettoyer($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    /**
+     * Récupère le terme de recherche envoyé via une requête POST et le transmet à ProductManager::getSearch.
+     * Répond avec une liste de montres correspondant à la recherche au format JSON.
+     * 
+     * @param array $params Paramètres inutilisés dans cette fonction.
+     */
+    public static function search($params) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $search = isset($input['search']) ? $input['search'] : '';
+
+            // Supposons que self::nettoyer() nettoie correctement les données de recherche
+            $search = self::nettoyer($search);
+
+            header('Content-Type: application/json');
+
+            // Assurez-vous que ProductManager::search() retourne des données au format JSON
+            echo ProductManager::search($search);
+        }
+    }
+
+
 }
 
 ?>

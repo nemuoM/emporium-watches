@@ -5,6 +5,8 @@ RewriteEngine on
 # map neat URL to internal URL
 RewriteRule ^info/$     index.php?controller=view&action=information [nc]
 
+RewriteRule ^search/$     index.php?controller=montre&action=search [nc]
+
 RewriteRule ^panier/$   index.php?controller=view&action=panier [nc]
 RewriteRule ^panier/affiche/$   index.php?controller=cart&action=afficheCart [nc]
 RewriteRule ^panier/del/([0-9]+)/$     index.php?controller=cart&action=delMontre&id=$1 [nc,qsa]

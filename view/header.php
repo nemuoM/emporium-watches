@@ -22,9 +22,12 @@
 
     <div class="divbar mars">
         <form class="d-flex espace" role="search">
-        <input class="form-control me-2 rech" type="search" placeholder="Rechercher" aria-label="Search">
-        <button class="gnonmi pioupiou" type="submit">Rechercher</button>
-      </form>
+            <input class="form-control me-2 rech" type="search" placeholder="Rechercher" aria-label="Search" onkeyup="Search(this.value)">
+            <button class="gnonmi pioupiou" type="submit">Rechercher</button>
+        </form>
+        <div id="resultat-recherche" class="resultatR">
+            
+        </div>
         <div id="text">
             <li class="ha"><a href="<?= SERVER_URL ?>/">Accueil</a></li>
             <li class="he"><a href="<?= SERVER_URL ?>/montres/">Nos montres & accessoires</a></li>
@@ -44,4 +47,6 @@
             </ul>
         </div>
     </div>
+
+    <script src="<?= SERVER_URL ?>/js/recherche.js"></script>
 </html>

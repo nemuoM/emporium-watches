@@ -214,6 +214,7 @@ CREATE TABLE IF NOT EXISTS `details_accessoires`(
 -- Création d'une procédure
 --
 DELIMITER &&
+DROP PROCEDURE IF EXISTS AjtOuCreerCart &&
 CREATE PROCEDURE AjtOuCreerCart(idC INT, idM INT, laqte INT)
 BEGIN 
   
@@ -224,6 +225,7 @@ BEGIN
   END IF;
 END&&
 
+DROP PROCEDURE IF EXISTS decrDelete &&
 CREATE PROCEDURE decrDelete(idC INT, idM INT)
 BEGIN 
   IF (SELECT qte FROM details_montre WHERE idCommande = idC AND idMontre = idM) = 1 THEN 
@@ -235,6 +237,7 @@ END &&
 DELIMITER ;
 
 DELIMITER $$
+DROP TRIGGER IF EXISTS update_statut_trigger$$
 CREATE TRIGGER update_statut_trigger
 AFTER UPDATE ON commande
 FOR EACH ROW
