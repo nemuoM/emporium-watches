@@ -14,9 +14,9 @@
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                         <h5 class="text-uppercase">Liens</h5>
                         <ul class="list-unstyled mb-0">
-                            <li><a href="<?= SERVER_URL ?>/" class="text-white">Accueil</a></li>
-                            <li><a href="<?= SERVER_URL ?>/montres/" class="text-white">Nos Montres</a></li>
-                            <li><a href="<?= SERVER_URL ?>/info/" class="text-white">Informations</a></li>
+                            <li><a href="<?= SERVER_URL ?>/" class="text-white">Accueil</a></li><br>
+                            <li><a href="<?= SERVER_URL ?>/montres/" class="text-white">Nos Montres</a></li><br>
+                            <li><a href="<?= SERVER_URL ?>/info/" class="text-white">Informations</a></li><br>
                         </ul>
                     </div>
 
@@ -24,7 +24,7 @@
                         <h5 class="text-uppercase">Contact</h5>
                         <ul class="list-unstyled">
                             <li><a href="#!" class="text-white">+33 4 23 45 67 89</a></li>
-                            <li><a href="#!" class="text-white">info@emporiumwatches.com</a></li>
+                            <li><a href="#!" class="text-white">info@emporiumwatches.com</a></li><br>
                             <li><a href="#!" class="text-white">Montpellier, France</a></li>
                         </ul>
                     </div>
