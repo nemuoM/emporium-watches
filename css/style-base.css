@@ -85,6 +85,16 @@ li {
     background-color: #e0cda9;
 }
 
+.btn-rouge {
+    color: white;
+    background-color: #ca0000;
+    cursor: pointer;
+}
+.btn-rouge:hover {
+    background-color: #ca0000;
+    color: white;
+}
+
 #espace-membre {
     display: flex;
     flex-direction: column;
