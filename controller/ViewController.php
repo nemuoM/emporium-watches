@@ -16,7 +16,6 @@ class ViewController extends Controller {
      * Action qui affiche la page d'accueil
      */
     public static function accueil($params){
-
         // appelle la vue
         $view = ROOT.'/view/accueil.php';
         $params = array();
