@@ -378,6 +378,32 @@
             unset($cnx);
         }
     }
+
+    public static function getCommande(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'SELECT idCommande, dateCmd, idStatut FROM commande WHERE idClient = :idClient AND idStatut != 1';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':idClient', $_SESSION['idClient'], PDO::PARAM_INT);
+            $stmt->execute();
+
+            $data = null;
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $data[] = $row;
+            }
+        }
+        catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+
+        return json_encode($data);
+    }
 }
 
 ?>

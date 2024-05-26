@@ -47,3 +47,5 @@ RewriteRule ^recapitulatif/$    index.php?controller=view&action=recapitulatif [
 RewriteRule ^recapitulatif/watchrecap/$    index.php?controller=cart&action=getConfirmedCart [nc]
 
 RewriteRule ^recapitulatif/cancel/$    index.php?controller=cart&action=cancelCart [nc]
+
+RewriteRule ^profil/affiche/$    index.php?controller=profil&action=getCmd [nc]

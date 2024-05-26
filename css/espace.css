@@ -1,0 +1,33 @@
+.cont {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.mb-6 {
+    font-family: "Conso";
+}
+.card {
+    margin-top: 1rem;
+}
+.modif {
+    margin-top: 1rem;
+}
+.cmd {
+    height: 620px;
+    overflow-y: auto;
+}
+
+.card-title {
+    font-family: "GSK";
+    font-size: 1.4rem;
+}
+
+.card-text {
+    font-family: "GSK";
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: black;
+}
+
+.back {
+    margin-bottom: 20px;
+}

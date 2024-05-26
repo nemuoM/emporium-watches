@@ -9,9 +9,16 @@
  * @date 12/2023
  */
 
-class ClientController extends Controller {
+class ProfilController extends Controller {
 
-    //A COMPLÉTER
+    public static function getCmd($params){
+        if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+
+            header('Content-Type: application/json');
+
+            echo ProductManager::getCommande();
+        }
+    }
     
 }
 
