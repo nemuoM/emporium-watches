@@ -18,7 +18,7 @@ require_once 'header.php'; // Inclusion de l'en-tête
         <div class="col-md-6">
             <!-- Informations du profil -->
             <h2>Informations du profil</h2>
-            <form action="update_profile.php" method="POST">
+            <form id="info">
                 <div class="form-group">
                     <label for="nom">Nom:</label>
                     <input type="text" class="form-control" id="nom" name="nom" value="<?= $_SESSION['nom'] ?>">
@@ -49,15 +49,17 @@ require_once 'header.php'; // Inclusion de l'en-tête
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe actuel:</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input type="password" class="form-control" id="password" name="password" value="">
                 </div>
+                <br>
+                <p class="text-warning">Si vous souhaitez modifier votre mot de passe renseigner ces champs.</p>
                 <div class="form-group">
                     <label for="password">Nouveau mot de passe:</label>
-                    <input type="password" class="form-control" id="nPassword" name="password">
+                    <input type="password" class="form-control" id="nPassword" name="nPassword">
                 </div>
                 <div class="form-group">
                     <label for="password">Confirmer nouveau mot de passe:</label>
-                    <input type="password" class="form-control" id="nPasswordC" name="password">
+                    <input type="password" class="form-control" id="nPasswordC" name="nPasswordC">
                 </div>
                 <button type="submit" class="btn btn-primary modif">Modifier mes informations</button>
             </form>
@@ -74,6 +76,8 @@ require_once 'header.php'; // Inclusion de l'en-tête
 </div>
 
 <script src="<?= SERVER_URL ?>/js/affich-cmd.js"></script>
+<script src="<?= SERVER_URL ?>/js/modif-info.js"></script>
+
 <?php
 
 require_once 'footer.php'; // Inclusion du pied de page

@@ -62,6 +62,7 @@ class ClientManager
                     $_SESSION['nom'] = $nom;
                     $_SESSION['prenom'] = $prenom;
                     $_SESSION['mail'] = $mail;
+                    $_SESSION['mdp'] = $mdpHash;
                     $_SESSION['telephone'] = $telephone;
                     $_SESSION['adresse'] = $adresse;
                     $_SESSION['cp'] = $cp;
@@ -157,6 +158,8 @@ class ClientManager
 
             $stmt->execute();
 
+            $_SESSION['mdp'] = $mdpHash;
+
             unset($cnx);
         } catch (PDOException $e) {
             die('Erreur : ' . $e->getMessage());
@@ -174,16 +177,15 @@ class ClientManager
      * @param string $adresse La nouvelle adresse du client.
      * @param string $cp Le nouveau code postal du client.
      * @param string $ville La nouvelle ville du client.
-     * @param int $genre L'identifiant du nouveau genre du client.
      */
-    public static function updateClient($id, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $genre)
+    public static function updateClient($id, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville)
     {
         try {
             if (self::$cnx == null) {
                 self::$cnx = DbManager::getConnexion();
             }
 
-            $sql = 'UPDATE client SET nom = :n, prenom = :p, mail = :m, telephone = :t, adresse = :a, cp = :c, ville = :v, idGenre = :g WHERE idClient = :id';
+            $sql = 'UPDATE client SET nom = :n, prenom = :p, mail = :m, telephone = :t, adresse = :a, cp = :c, ville = :v WHERE idClient = :id';
 
             $stmt = self::$cnx->prepare($sql);
             $stmt->bindParam(':n', $nom, PDO::PARAM_STR);
@@ -193,7 +195,6 @@ class ClientManager
             $stmt->bindParam(':a', $adresse, PDO::PARAM_STR);
             $stmt->bindParam(':c', $cp, PDO::PARAM_STR);
             $stmt->bindParam(':v', $ville, PDO::PARAM_STR);
-            $stmt->bindParam(':g', $genre, PDO::PARAM_INT);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
             $stmt->execute();
@@ -205,7 +206,6 @@ class ClientManager
             $_SESSION['adresse'] = $adresse;
             $_SESSION['cp'] = $cp;
             $_SESSION['ville'] = $ville;
-            $_SESSION['idGenre'] = $genre;
 
             unset($cnx);
         } catch (PDOException $e) {

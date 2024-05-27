@@ -49,3 +49,4 @@ RewriteRule ^recapitulatif/watchrecap/$    index.php?controller=cart&action=getC
 RewriteRule ^recapitulatif/cancel/$    index.php?controller=cart&action=cancelCart [nc]
 
 RewriteRule ^profil/affiche/$    index.php?controller=profil&action=getCmd [nc]
+RewriteRule ^profil/updtprofil/$    index.php?controller=profil&action=updtProfil [nc]
