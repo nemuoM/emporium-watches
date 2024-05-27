@@ -52,7 +52,7 @@ require_once 'header.php'; // Inclusion de l'en-tête
                     <input type="password" class="form-control" id="password" name="password" value="">
                 </div>
                 <br>
-                <p class="text-warning">Si vous souhaitez modifier votre mot de passe renseigner ces champs.</p>
+                <p class="text-warning">Si vous souhaitez modifier votre mot de passe renseigner ces champs:</p>
                 <div class="form-group">
                     <label for="password">Nouveau mot de passe:</label>
                     <input type="password" class="form-control" id="nPassword" name="nPassword">
