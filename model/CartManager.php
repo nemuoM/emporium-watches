@@ -308,7 +308,7 @@ class CartManager{
             }
             $id = $_SESSION['idCommande'];
 
-            $sql = 'UPDATE commande SET idStatut = 2 WHERE idCommande = :idC';
+            $sql = 'UPDATE commande SET idStatut = 2, dateCmd = NOW() WHERE idCommande = :idC';
 
             $stmt = self::$cnx->prepare($sql);
             $stmt->bindParam(':idC', $id, PDO::PARAM_INT);

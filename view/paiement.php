@@ -12,16 +12,16 @@ require_once 'header.php';
                 <div id="livraison">
                     <h2>Adresse de livraison</h2>
                     <label for="address">Adresse:</label>
-                    <input type="text" name="address" id="address" required><br><br>
+                    <input type="text" name="address" id="address" value="<?= $_SESSION['adresse'] ?>" required><br><br>
                 
                     <label for="postal_code">Code postal:</label>
-                    <input type="text" name="postal_code" id="postal_code" required><br><br>
+                    <input type="text" name="postal_code" id="postal_code" value="<?= $_SESSION['cp'] ?>" required><br><br>
                 
                     <label for="city">Ville:</label>
-                    <input type="text" name="city" id="city" required><br><br>
+                    <input type="text" name="city" id="city" value="<?= $_SESSION['ville'] ?>" required><br><br>
                 
                     <label for="phone_number">Numéro de téléphone:</label>
-                    <input type="text" name="phone_number" id="phone_number" required>
+                    <input type="text" name="phone_number" id="phone_number" value="<?= $_SESSION['telephone'] ?>" required>
                 </div>
                 <div id="paiement">
                     <h2>Informations bancaires</h2>
