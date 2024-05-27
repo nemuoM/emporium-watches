@@ -31,7 +31,8 @@ class ProfilController extends Controller {
                 $cp = $_POST['cp'];
                 $ville = $_POST['ville'];
 
-                if(isset($_POST['nPassword']) && isset($_POST['nPasswordC']) && $_POST['nPassword'] == $_POST['nPasswordC']){
+                if(isset($_POST['nPassword']) && isset($_POST['nPasswordC']) && !empty($_POST['nPassword']) && !empty($_POST['nPasswordC']) && $_POST['nPassword'] == $_POST['nPasswordC']){
+                    echo 'je suis ici';
                     $mdp = $_POST['nPassword'];
                     ClientManager::updatePassword($_SESSION['idClient'], $mdp);
                 }
