@@ -8,11 +8,11 @@ require_once 'header.php'; // Inclusion de l'en-tête
 
 <div class="container cont">
     <h1 class="mb-6">Bienvenue dans votre espace <?= $_SESSION['nom'] . ' ' . $_SESSION['prenom'] ?></h1>
-    <a href="<?= SERVER_URL ?>/deconnexion/" class="btn btn-danger back">Déconnexion</a>
-    <a href="<?= SERVER_URL ?>/accueil/" class="btn btn-warning back">Supprimer mon compte</a>
     <?php if ($_SESSION['idRole'] == 1){ ?>
         <a href="<?= SERVER_URL ?>/admin/" class="btn btn-info back">Accéder au back-office</a>
     <?php } ?>
+    <a href="<?= SERVER_URL ?>/deconnexion/" class="btn btn-danger back">Déconnexion</a>
+    <a href="<?= SERVER_URL ?>/accueil/" class="btn btn-warning back">Supprimer mon compte</a>
 
     <div class="row">
         <div class="col-md-6">
