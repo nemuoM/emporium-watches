@@ -28,6 +28,11 @@
     color: black;
 }
 
-.back {
-    margin-bottom: 20px;
+.deco {
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+}
+
+.backoff {
+    margin-bottom: 1rem;
 }

@@ -9,11 +9,10 @@ require_once 'header.php'; // Inclusion de l'en-tête
 <div class="container cont">
     <h1 class="mb-6">Bienvenue dans votre espace <?= $_SESSION['nom'] . ' ' . $_SESSION['prenom'] ?></h1>
     <?php if ($_SESSION['idRole'] == 1){ ?>
-        <a href="<?= SERVER_URL ?>/admin/" class="btn btn-info back">Accéder au back-office</a>
+        <a href="<?= SERVER_URL ?>/admin/" class="btn btn-info backoff">Accéder au back-office</a>
     <?php } ?>
-    <a href="<?= SERVER_URL ?>/deconnexion/" class="btn btn-danger back">Déconnexion</a>
-    <a href="<?= SERVER_URL ?>/accueil/" class="btn btn-warning back">Supprimer mon compte</a>
-
+    <a href="<?= SERVER_URL ?>/deconnexion/" class="btn btn-danger deco">Déconnexion</a>
+    
     <div class="row">
         <div class="col-md-6">
             <!-- Informations du profil -->
@@ -63,6 +62,7 @@ require_once 'header.php'; // Inclusion de l'en-tête
                 </div>
                 <button type="submit" class="btn btn-primary modif">Modifier mes informations</button>
             </form>
+            <a href="<?= SERVER_URL ?>/accueil/" class="btn btn-warning modif">Supprimer mon compte</a>
             <!-- Add more profile information here if needed -->
             
         </div>
