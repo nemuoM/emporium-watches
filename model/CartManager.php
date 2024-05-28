@@ -368,7 +368,7 @@ class CartManager{
                 self::$cnx = DbManager::getConnexion();
             }
 
-            $sql = 'SELECT COUNT(idCommande) AS count FROM commande WHERE idStatut = 1';
+            $sql = 'SELECT COUNT(idCommande) AS count FROM commande WHERE idStatut != 1';
 
             $stmt = self::$cnx->query($sql);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
