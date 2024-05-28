@@ -64,6 +64,12 @@ class MontreController extends Controller{
         }
     }
 
+    public static function afficheMontre($params){
+        if ($_SERVER['REQUEST_METHOD'] === 'GET'){
+            echo ProductManager::getLesMontres(null);
+        }
+    }
+
     /**
      * Charge la vue de détail pour une montre spécifique.
      * 

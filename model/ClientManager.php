@@ -241,6 +241,28 @@ class ClientManager
             die('Erreur : ' . $e->getMessage());
         }
     }
+
+    public static function getNbClients()
+    {
+        try {
+            if (self::$cnx == null) {
+                self::$cnx = DbManager::getConnexion();
+            }
+
+            $sql = 'SELECT COUNT(idClient) AS count FROM client';
+
+            $stmt = self::$cnx->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $count = $result['count'];
+
+            return $count;
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+    }
 }
 
 ?>

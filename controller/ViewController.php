@@ -67,4 +67,10 @@ class ViewController extends Controller {
         $params = array();
         self::render($view, $params);
     }
+
+    public static function backOffice($params){
+        $view = ROOT.'/view/back-office.php';
+        $params = array();
+        self::render($view, $params);
+    }
 } 

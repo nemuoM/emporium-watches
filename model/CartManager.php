@@ -362,6 +362,26 @@ class CartManager{
     }
 
 
+    public static function getNbCmd(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+
+            $sql = 'SELECT COUNT(idCommande) AS count FROM commande WHERE idStatut = 1';
+
+            $stmt = self::$cnx->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $count = $result['count'];
+
+            return $count;
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+    }
 }
 
 ?>

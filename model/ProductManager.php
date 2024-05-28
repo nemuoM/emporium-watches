@@ -93,7 +93,12 @@
             if(self::$cnx == null){
                 self::$cnx = DbManager::getConnexion();
             }
-            $sql = 'SELECT idMontre, image, nom, prix,description, MA.libelle AS marque FROM montre MO JOIN marque MA on MO.idMarque = MA.idMarque WHERE idMontre = :id;';
+            $sql = 'SELECT idMontre, image, nom, prix, description, stock, ';
+            $sql .= 'MO.idMarque, MA.libelle AS marque, ';
+            $sql .= 'idGenre, idCouleur, idStyle, idMouvement, idMatiereCadran, idMatiereBracelet ';
+            $sql .= 'FROM montre MO ';
+            $sql .= 'JOIN marque MA on MO.idMarque = MA.idMarque ';
+            $sql .= 'WHERE idMontre = :id;';
 
             $stmt = self::$cnx->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -403,6 +408,26 @@
         }
 
         return json_encode($data);
+    }
+
+    public static function getNombreMontre(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'SELECT COUNT(*) AS count FROM montre';
+
+            $stmt = self::$cnx->query($sql);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $count = $result['count'];
+
+            return $count;
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
     }
 }
 

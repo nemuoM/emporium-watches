@@ -50,3 +50,13 @@ RewriteRule ^recapitulatif/cancel/$    index.php?controller=cart&action=cancelCa
 
 RewriteRule ^profil/affiche/$    index.php?controller=profil&action=getCmd [nc]
 RewriteRule ^profil/updtprofil/$    index.php?controller=profil&action=updtProfil [nc]
+
+RewriteRule ^admin/$    index.php?controller=view&action=backOffice [nc]
+RewriteRule ^admin/marque/$       index.php?controller=montre&action=afficheMarque [nc]
+RewriteRule ^admin/genre/$       index.php?controller=montre&action=afficheGenre [nc]
+RewriteRule ^admin/couleur/$       index.php?controller=montre&action=afficheCouleur [nc]
+RewriteRule ^admin/style/$       index.php?controller=montre&action=afficheStyle [nc]
+RewriteRule ^admin/mouvement/$       index.php?controller=montre&action=afficheMouvement [nc]
+RewriteRule ^admin/matiere/$       index.php?controller=montre&action=afficheMatiere [nc]
+RewriteRule ^admin/affiche/$     index.php?controller=montre&action=afficheMontre [nc]
+RewriteRule ^admin/rempinfo/([0-9]+)/$       index.php?controller=montre&action=maMontre&id=$1 [nc,qsa]
