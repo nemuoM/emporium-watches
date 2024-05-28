@@ -1,5 +1,5 @@
 <?php
-    $title = 'Accueil';
+    $title = 'Back-office';
     require_once 'header.php';
 
     if($_SESSION['idClient'] != 1){
@@ -9,14 +9,6 @@
 ?>
 
 <link rel="stylesheet" href="<?= SERVER_URL ?>/css/back.css">
-<style>
-    .form-group {
-        margin-top: 1rem;
-    }
-    label{
-        font-weight: bold;
-    }
-</style>
 
 <!-- Modal ajout et modification de montre -->
 <div class="modal fade" id="montreModal" tabindex="-1" role="dialog" aria-labelledby="montreModalLabel" aria-hidden="true">
@@ -32,6 +24,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <form id="formMontre">
+                            <input type="hidden" class="idcacher" id="idMontre" value="0">
                             <div class="form-group">
                                 <label for="image">Image</label>
                                 <input type="file" class="form-control-file" id="image" accept="image/*">
@@ -96,7 +89,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn btn-primary" onclick="addMontre()">Enregistrer</button>
             </div>
         </div>
     </div>
@@ -115,11 +108,12 @@
                 <div class="form-group">
                     <label for="libelle">Type d'ajout</label>
                     <select class="form-control" id="type">
-                        <option>Marque</option>
-                        <option>Couleur</option>
-                        <option>Style</option>
-                        <option>Mouvement</option>
-                        <option>Matière</option>
+                        <option value="1">Marque</option>
+                        <option value="2">Genre</option>
+                        <option value="3">Couleur</option>
+                        <option value="4">Style</option>
+                        <option value="5">Mouvement</option>
+                        <option value="6">Matière</option>
                     </select>
                     <label for="libelle" style="margin-top: 1rem;">Libellé</label>
                     <input type="text" class="form-control" id="libelle" placeholder="Entrez le libellé">
@@ -127,7 +121,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn btn-primary" onclick="addLibelle()">Enregistrer</button>
             </div>
         </div>
     </div>
@@ -186,10 +180,6 @@
 
 <script src="<?= SERVER_URL ?>/js/afficher-drpBox.js"></script>
 <script src="<?= SERVER_URL ?>/js/afficher-back.js"></script>
-
-<script>
-    
-</script>
 
 <?php
     require_once 'footer.php';

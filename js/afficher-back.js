@@ -1,4 +1,5 @@
 const array = document.getElementById("array");
+let ajout = false;
 
 function AfficherMontre() {
     fetch("affiche/", {
@@ -40,6 +41,7 @@ function AfficherMontre() {
 AfficherMontre();
 
 function rempFormMontre(idM) {
+    ajout = false;
     fetch("rempinfo/" + idM + "/", {
         method: "GET",
         headers: {
@@ -48,6 +50,7 @@ function rempFormMontre(idM) {
     })
         .then((response) => response.json())
         .then((data) => {
+            document.getElementById("idMontre").value = data[0].idMontre;
             document.getElementById("nom").value = data[0].nom;
             document.getElementById("description").value = data[0].description;
             document.getElementById("marque").value = data[0].idMarque;
@@ -61,8 +64,10 @@ function rempFormMontre(idM) {
             document.getElementById("prix").value = data[0].prix;
             document.getElementById("stock").value = data[0].stock;
 
+            document.getElementById("image").value = "";
             document.getElementById("imagePreview").src =
                 "../../../../img/montre/" + data[0].image;
+            document.getElementById("imagePreview").alt = data[0].image;
             document.getElementById("imagePreview").style.display = "block";
             document.getElementById("imagePreview").style.width = "150px";
         })
@@ -72,6 +77,7 @@ function rempFormMontre(idM) {
 }
 
 function resetModal() {
+    ajout = true;
     document.getElementById("nom").value = "";
     document.getElementById("description").value = "";
     document.getElementById("marque").value = "";
@@ -83,7 +89,95 @@ function resetModal() {
     document.getElementById("matiereC").value = "";
     document.getElementById("prix").value = "";
     document.getElementById("stock").value = "";
-
+    document.getElementById("image").value = "";
     document.getElementById("imagePreview").src = "";
     document.getElementById("imagePreview").style.display = "none";
+}
+
+function addMontre() {
+    let formData = new FormData();
+    if (ajout) {
+        var url = "ajout/";
+        if (!document.getElementById("image").files[0]) {
+            alert("Veuillez choisir une image");
+            return;
+        }
+    } else {
+        var url = "modifMontre/";
+        formData.append("id", document.getElementById("idMontre").value);
+        if (document.getElementById("image").files[0]) {
+            formData.append("image", document.getElementById("image").files[0]);
+        } else {
+            formData.append(
+                "image",
+                document.getElementById("imagePreview").alt
+            );
+        }
+    }
+
+    formData.append("nom", document.getElementById("nom").value);
+    formData.append(
+        "description",
+        document.getElementById("description").value
+    );
+    formData.append("marque", document.getElementById("marque").value);
+    formData.append("genre", document.getElementById("genre").value);
+    formData.append("couleur", document.getElementById("couleur").value);
+    formData.append("style", document.getElementById("style").value);
+    formData.append("mouvement", document.getElementById("mouvement").value);
+    formData.append("matiereC", document.getElementById("matiereC").value);
+    formData.append("matiereB", document.getElementById("matiereB").value);
+    formData.append("prix", document.getElementById("prix").value);
+    formData.append("stock", document.getElementById("stock").value);
+
+    fetch(url, {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                alert(data.success);
+                $("#montreModal").modal("hide");
+                resetModal();
+                AfficherMontre();
+            } else {
+                alert("Erreur lors de l'ajout de la montre");
+            }
+        })
+        .catch((error) => {
+            console.error("Erreur réseau:", error);
+            alert("Erreur réseau lors de l'ajout de la montre");
+        });
+}
+
+function addLibelle() {
+    let formData = new FormData();
+    formData.append("type", document.getElementById("type").value);
+    formData.append("libelle", document.getElementById("libelle").value);
+
+    fetch("ajoutLibelle/", {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                alert(data.success);
+                $("#libelleModal").modal("hide");
+                document.getElementById("libelle").value = "";
+                lesMarques();
+                lesGenres();
+                lesCouleurs();
+                lesStyles();
+                lesMouvements();
+                lesMatieres();
+            } else {
+                alert("Erreur lors de l'ajout du libellé");
+            }
+        })
+        .catch((error) => {
+            console.error("Erreur réseau:", error);
+            alert("Erreur réseau lors de l'ajout du libellé");
+        });
 }

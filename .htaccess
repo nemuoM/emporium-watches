@@ -60,3 +60,6 @@ RewriteRule ^admin/mouvement/$       index.php?controller=montre&action=afficheM
 RewriteRule ^admin/matiere/$       index.php?controller=montre&action=afficheMatiere [nc]
 RewriteRule ^admin/affiche/$     index.php?controller=montre&action=afficheMontre [nc]
 RewriteRule ^admin/rempinfo/([0-9]+)/$       index.php?controller=montre&action=maMontre&id=$1 [nc,qsa]
+RewriteRule ^admin/ajout/$       index.php?controller=montre&action=ajoutMontre [nc]
+RewriteRule ^admin/ajoutLibelle/$       index.php?controller=montre&action=ajoutLibelle [nc]
+RewriteRule ^admin/modifMontre/$       index.php?controller=montre&action=modifMontre [nc]

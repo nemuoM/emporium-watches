@@ -297,25 +297,26 @@
      * @param array $montre Les données de la montre à insérer.
      * @return void
      */
-    public static function setMontre($montre){
+    public static function setMontre($image, $nom, $prix, $stock, $description, $idMarque, $idGenre, $idCouleur, $idStyle, $idMouvement, $idMatiereCadran, $idMatiereBracelet){
         try{
             if(self::$cnx == null){
                 self::$cnx = DbManager::getConnexion();
             }
-            $sql = 'INSERT INTO montre (image, nom, prix, description, idMarque, idGenre, idCouleur, idStyle, idMouvement, idMatiereCadran, idMatiereBracelet) VALUES (:image, :nom, :prix, :description, :idMarque, :idGenre, :idCouleur, :idStyle, :idMouvement, :idMatiereCadran, :idMatiereBracelet)';
+            $sql = 'INSERT INTO montre (image, nom, prix, stock, dateAjout, description, idMarque, idGenre, idCouleur, idStyle, idMouvement, idMatiereCadran, idMatiereBracelet) VALUES (:image, :nom, :prix, :stock, NOW(), :description, :idMarque, :idGenre, :idCouleur, :idStyle, :idMouvement, :idMatiereCadran, :idMatiereBracelet)';
 
             $stmt = self::$cnx->prepare($sql);
-            $stmt->bindParam(':image', $montre['image'], PDO::PARAM_STR);
-            $stmt->bindParam(':nom', $montre['nom'], PDO::PARAM_STR);
-            $stmt->bindParam(':prix', $montre['prix'], PDO::PARAM_INT);
-            $stmt->bindParam(':description', $montre['description'], PDO::PARAM_STR);
-            $stmt->bindParam(':idMarque', $montre['idMarque'], PDO::PARAM_INT);
-            $stmt->bindParam(':idGenre', $montre['idGenre'], PDO::PARAM_INT);
-            $stmt->bindParam(':idCouleur', $montre['idCouleur'], PDO::PARAM_INT);
-            $stmt->bindParam(':idStyle', $montre['idStyle'], PDO::PARAM_INT);
-            $stmt->bindParam(':idMouvement', $montre['idMouvement'], PDO::PARAM_INT);
-            $stmt->bindParam(':idMatiereCadran', $montre['idMatiereCadran'], PDO::PARAM_INT);
-            $stmt->bindParam(':idMatiereBracelet', $montre['idMatiereBracelet'], PDO::PARAM_INT);
+            $stmt->bindParam(':image', $image, PDO::PARAM_STR);
+            $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+            $stmt->bindParam(':prix', $prix);
+            $stmt->bindParam(':stock', $stock);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+            $stmt->bindParam(':idMarque', $idMarque, PDO::PARAM_INT);
+            $stmt->bindParam(':idGenre', $idGenre, PDO::PARAM_INT);
+            $stmt->bindParam(':idCouleur', $idCouleur, PDO::PARAM_INT);
+            $stmt->bindParam(':idStyle', $idStyle, PDO::PARAM_INT);
+            $stmt->bindParam(':idMouvement', $idMouvement, PDO::PARAM_INT);
+            $stmt->bindParam(':idMatiereCadran', $idMatiereCadran, PDO::PARAM_INT);
+            $stmt->bindParam(':idMatiereBracelet', $idMatiereBracelet, PDO::PARAM_INT);
             $stmt->execute();
             
         }catch (PDOException $e) {
@@ -331,26 +332,46 @@
      * @param array $montre Les données de la montre mise à jour.
      * @return void
      */
-    public static function updateMontre($montre){
+    public static function updateMontre($id, $image, $nom, $prix, $stock, $description, $idMarque, $idGenre, $idCouleur, $idStyle, $idMouvement, $idMatiereCadran, $idMatiereBracelet){
         try{
             if(self::$cnx == null){
                 self::$cnx = DbManager::getConnexion();
             }
-            $sql = 'UPDATE montre SET image = :image, nom = :nom, prix = :prix, description = :description, idMarque = :idMarque, idGenre = :idGenre, idCouleur = :idCouleur, idStyle = :idStyle, idMouvement = :idMouvement, idMatiereCadran = :idMatiereCadran, idMatiereBracelet = :idMatiereBracelet WHERE idMontre = :idMontre';
+            $sql = 'UPDATE montre SET image = :image, nom = :nom, prix = :prix, stock = :stock, description = :description, idMarque = :idMarque, idGenre = :idGenre, idCouleur = :idCouleur, idStyle = :idStyle, idMouvement = :idMouvement, idMatiereCadran = :idMatiereCadran, idMatiereBracelet = :idMatiereBracelet WHERE idMontre = :idMontre';
 
             $stmt = self::$cnx->prepare($sql);
-            $stmt->bindParam(':image', $montre['image'], PDO::PARAM_STR);
-            $stmt->bindParam(':nom', $montre['nom'], PDO::PARAM_STR);
-            $stmt->bindParam(':prix', $montre['prix'], PDO::PARAM_INT);
-            $stmt->bindParam(':description', $montre['description'], PDO::PARAM_STR);
-            $stmt->bindParam(':idMarque', $montre['idMarque'], PDO::PARAM_INT);
-            $stmt->bindParam(':idGenre', $montre['idGenre'], PDO::PARAM_INT);
-            $stmt->bindParam(':idCouleur', $montre['idCouleur'], PDO::PARAM_INT);
-            $stmt->bindParam(':idStyle', $montre['idStyle'], PDO::PARAM_INT);
-            $stmt->bindParam(':idMouvement', $montre['idMouvement'], PDO::PARAM_INT);
-            $stmt->bindParam(':idMatiereCadran', $montre['idMatiereCadran'], PDO::PARAM_INT);
-            $stmt->bindParam(':idMatiereBracelet', $montre['idMatiereBracelet'], PDO::PARAM_INT);
-            $stmt->bindParam(':idMontre', $montre['idMontre'], PDO::PARAM_INT);
+            $stmt->bindParam(':image', $image, PDO::PARAM_STR);
+            $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+            $stmt->bindParam(':prix', $prix);
+            $stmt->bindParam(':stock', $stock);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+            $stmt->bindParam(':idMarque', $idMarque, PDO::PARAM_INT);
+            $stmt->bindParam(':idGenre', $idGenre, PDO::PARAM_INT);
+            $stmt->bindParam(':idCouleur', $idCouleur, PDO::PARAM_INT);
+            $stmt->bindParam(':idStyle', $idStyle, PDO::PARAM_INT);
+            $stmt->bindParam(':idMouvement', $idMouvement, PDO::PARAM_INT);
+            $stmt->bindParam(':idMatiereCadran', $idMatiereCadran, PDO::PARAM_INT);
+            $stmt->bindParam(':idMatiereBracelet', $idMatiereBracelet, PDO::PARAM_INT);
+            $stmt->bindParam(':idMontre', $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+    }
+
+    public static function setLibelle($type, $libelle){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = "INSERT INTO $type(libelle) VALUES (:libelle)";
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':libelle', $libelle, PDO::PARAM_STR);
             $stmt->execute();
             
         }catch (PDOException $e) {

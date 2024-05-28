@@ -16,3 +16,10 @@
     width: 150px;
     height: 150px;
 }
+
+.form-group {
+    margin-top: 1rem;
+}
+label {
+    font-weight: bold;
+}
