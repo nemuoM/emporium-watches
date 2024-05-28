@@ -178,5 +178,3 @@ lesCouleurs();
 lesStyles();
 lesMouvements();
 lesMatieres();
-
-lesMarques();
