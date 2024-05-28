@@ -30,7 +30,7 @@
         </div>
         <div id="text">
             <li class="ha"><a href="<?= SERVER_URL ?>/">Accueil</a></li>
-            <li class="he"><a href="<?= SERVER_URL ?>/montres/">Nos montres & accessoires</a></li>
+            <li class="he"><a href="<?= SERVER_URL ?>/montres/">Nos montres</a></li>
             <li class="ho"><a href="<?= SERVER_URL ?>/info/">Informations</a></li>
         </div>
 
