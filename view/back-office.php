@@ -2,9 +2,9 @@
     $title = 'Back-office';
     require_once 'header.php';
 
-    if($_SESSION['idClient'] != 1){
+    if(!isset($_SESSION['idRole']) || $_SESSION['idRole'] != 1) {
         header('Location: '.SERVER_URL);
-    };
+    }
 
 ?>
 
