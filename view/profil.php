@@ -11,7 +11,7 @@ require_once 'header.php'; // Inclusion de l'en-tête
     <a href="<?= SERVER_URL ?>/deconnexion/" class="btn btn-danger back">Déconnexion</a>
     <a href="<?= SERVER_URL ?>/accueil/" class="btn btn-warning back">Supprimer mon compte</a>
     <?php if ($_SESSION['idRole'] == 1){ ?>
-        <a href="<?= SERVER_URL ?>/back-office/" class="btn btn-info back">Accéder au back-office</a>
+        <a href="<?= SERVER_URL ?>/admin/" class="btn btn-info back">Accéder au back-office</a>
     <?php } ?>
 
     <div class="row">
