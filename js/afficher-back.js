@@ -102,6 +102,7 @@ function addMontre() {
             alert("Veuillez choisir une image");
             return;
         }
+        formData.append("image", document.getElementById("image").files[0]);
     } else {
         var url = "modifMontre/";
         formData.append("id", document.getElementById("idMontre").value);
