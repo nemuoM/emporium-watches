@@ -3,59 +3,35 @@
 -- Script créer création ou restaurer la bdd
 
 -- Création de la bdd si elle n`exite pas 
+DROP DATABASE IF EXISTS `db_emporium`;
 CREATE DATABASE IF NOT EXISTS `db_emporium` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
 USE `db_emporium`;
 
+CREATE USER IF NOT EXISTS 'emporium' IDENTIFIED BY 'DumB0__2500!';
+GRANT ALL PRIVILEGES ON db_emporium.* TO 'emporium';
+
 -- Suppression des tables si elles existent
-DROP TABLE IF EXISTS `transporteur`;
-DROP TABLE IF EXISTS `categorie`;
-DROP TABLE IF EXISTS `ss_categorie`;
-DROP TABLE IF EXISTS `marque`;
-DROP TABLE IF EXISTS `genre`;
-DROP TABLE IF EXISTS `couleur`;
-DROP TABLE IF EXISTS `style`;
-DROP TABLE IF EXISTS `mouvement`;
-DROP TABLE IF EXISTS `matiere`;
-DROP TABLE IF EXISTS `montre`;
-DROP TABLE IF EXISTS `accessoires`;
-DROP TABLE IF EXISTS `roles`;
-DROP TABLE IF EXISTS `client`;
-DROP TABLE IF EXISTS `avis`;
-DROP TABLE IF EXISTS `statut`;
-DROP TABLE IF EXISTS `commande`;
 DROP TABLE IF EXISTS `details_montre`;
-DROP TABLE IF EXISTS `details_accessoires`;
+DROP TABLE IF EXISTS `changement_statut`;
+DROP TABLE IF EXISTS `commande`;
+DROP TABLE IF EXISTS `statut`;
+DROP TABLE IF EXISTS `avis`;
+DROP TABLE IF EXISTS `client`;
+DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `montre`;
+DROP TABLE IF EXISTS `matiere`;
+DROP TABLE IF EXISTS `mouvement`;
+DROP TABLE IF EXISTS `style`;
+DROP TABLE IF EXISTS `couleur`;
+DROP TABLE IF EXISTS `genre`;
+DROP TABLE IF EXISTS `marque`;
 
 --
 -- CRÉATION DES TABLES
 --
-CREATE TABLE IF NOT EXISTS `transporteur`(
-  `idTransporteur` integer NOT NULL AUTO_INCREMENT,
-  `nom` varchar(15),
-  CONSTRAINT `pk_transporteur` PRIMARY KEY (`idTransporteur`)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-CREATE TABLE IF NOT EXISTS `categorie`(
-  `idCategorie` integer NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(30),
-  CONSTRAINT `pk_categorie` PRIMARY KEY (`idCategorie`)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-CREATE TABLE IF NOT EXISTS `ss_categorie`(
-  `numero` integer NOT NULL AUTO_INCREMENT,
-  `idCategorie` integer NOT NULL,
-  `libelle` varchar(20),
-  CONSTRAINT `pk_ss_categorie` PRIMARY KEY (`numero`),
-  FOREIGN KEY (`idCategorie`) REFERENCES `categorie`(`idCategorie`)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
 CREATE TABLE IF NOT EXISTS `marque`(
   `idMarque` integer NOT NULL AUTO_INCREMENT,
   `libelle` varchar(30),
-  `adresse` varchar(60),
-  `cp` varchar(20),
-  `ville` varchar(20),
-  `telephone` varchar(20),
   CONSTRAINT `pk_marque` PRIMARY KEY(`idMarque`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -114,24 +90,6 @@ CREATE TABLE IF NOT EXISTS `montre`(
   FOREIGN KEY (`idMatiereBracelet`) REFERENCES `matiere`(`idMatiere`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `accessoires`(
-  `idAccessoires` integer NOT NULL AUTO_INCREMENT,
-  `image` varchar(150),
-  `nom` varchar(50),
-  `description` varchar(800),
-  `prix` float(4,2),
-  `dateAjout` date,
-  `stock` integer,
-  `idMarque` integer NOT NULL,
-  `idCategorie` integer NOT NULL,
-  `numeroSS` integer NOT NULL,
-  `idMontre` integer,
-  CONSTRAINT `pk_accessoires` PRIMARY KEY(`idAccessoires`),
-  FOREIGN KEY (`idMarque`) REFERENCES `marque`(`idMarque`),
-  FOREIGN KEY (`idCategorie`,`numeroSS`) REFERENCES `ss_categorie`(`idCategorie`,`numero`),
-  FOREIGN KEY (`idMontre`) REFERENCES `montre`(`idMontre`)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
 CREATE TABLE IF NOT EXISTS `roles`(
   `idRole` integer NOT NULL AUTO_INCREMENT,
   `libelle` varchar(20),
@@ -175,11 +133,9 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `idCommande` integer NOT NULL AUTO_INCREMENT,
   `dateCmd` date NOT NULL,
   `idStatut` integer NOT NULL,
-  `idTransporteur` integer,
   `idClient` integer NOT NULL,
   CONSTRAINT `pk_commande` PRIMARY KEY (`idCommande`),
   FOREIGN KEY (`idStatut`) REFERENCES `statut`(`idStatut`),
-  FOREIGN KEY (`idTransporteur`) REFERENCES `transporteur`(`idTransporteur`),
   FOREIGN KEY (`idClient`) REFERENCES `client`(`idClient`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -199,15 +155,6 @@ CREATE TABLE IF NOT EXISTS `details_montre`(
   CONSTRAINT `pk_detailsM` PRIMARY KEY (`idCommande`,`idMontre`),
   FOREIGN KEY (`idCommande`) REFERENCES `commande`(`idCommande`),
   FOREIGN KEY (`idMontre`) REFERENCES `montre`(`idMontre`) 
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-CREATE TABLE IF NOT EXISTS `details_accessoires`(
-  `idCommande` integer NOT NULL, 
-  `idAccessoires` integer NOT NULL,
-  `qte` integer,
-  CONSTRAINT `pk_detailsA` PRIMARY KEY (`idCommande`,`idAccessoires`),
-  FOREIGN KEY (`idCommande`) REFERENCES `commande`(`idCommande`),
-  FOREIGN KEY (`idAccessoires`) REFERENCES `accessoires`(`idAccessoires`) 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -242,12 +189,44 @@ CREATE TRIGGER update_statut_trigger
 AFTER UPDATE ON commande
 FOR EACH ROW
 BEGIN
-    IF NEW.idStatut <> OLD.idStatut THEN
-        INSERT INTO changement_statut (idCommande, idStatut, dateChangement)
-        VALUES (NEW.idCommande, NEW.idStatut, CURDATE());
-    END IF;
+  IF NEW.idStatut <> OLD.idStatut THEN
+    INSERT INTO changement_statut (idCommande, idStatut, dateChangement)
+    VALUES (NEW.idCommande, NEW.idStatut, CURDATE());
+  END IF;
+  
+  IF NEW.idStatut = 2 THEN
+    UPDATE montre m
+    INNER JOIN details_montre dm ON m.idMontre = dm.idMontre
+    SET m.stock = m.stock - dm.qte
+    WHERE dm.idCommande = NEW.idCommande;
+  END IF;
+
+  IF NEW.idStatut = 6 THEN
+    UPDATE montre m
+    INNER JOIN details_montre dm ON m.idMontre = dm.idMontre
+    SET m.stock = m.stock + dm.qte
+    WHERE dm.idCommande = NEW.idCommande;
+  END IF;
 END$$
 DELIMITER ;
+
+-- Trigger pour supprimer un client et ses références dans les tables liées
+DROP TRIGGER IF EXISTS delete_client_trigger;
+DELIMITER $$
+CREATE TRIGGER delete_client_trigger
+BEFORE DELETE ON client
+FOR EACH ROW
+BEGIN
+  -- Supprimer les enregistrements liés dans la table details_montre et changement_statut avant de supprimer les commandes
+  DELETE FROM details_montre WHERE idCommande IN (SELECT idCommande FROM commande WHERE idClient = OLD.idClient);
+  DELETE FROM changement_statut WHERE idCommande IN (SELECT idCommande FROM commande WHERE idClient = OLD.idClient);
+  
+  -- Supprimer les enregistrements liés dans la table commande
+  DELETE FROM commande WHERE idClient = OLD.idClient;
+
+END$$
+DELIMITER ;
+
 
 
 
@@ -256,15 +235,15 @@ DELIMITER ;
 --
 INSERT INTO `roles`(`libelle`) VALUES ('SuperAdmin'),('Admin'),('user');
 
-INSERT INTO `marque` (`libelle`, `adresse`, `cp`, `ville`, `telephone`) 
-              VALUES ('KUOE KYOTO', '2nd floor, LS Kyoto Building, 75-6', '604-8101', 'Kyoto', null), 
-                     ('Orient', null, null, null, '(213) 989-2019'),
-                     ('MDT', '15 Rue des Pensées', '78690', 'Les Essarts-le-Roi', '0603003020'),
-                     ('Seiko', '1-26-1, Ginza, Chuo-Ku', '104-8110', 'Tokyo', '+81 3 35632111'),
-                     ('Lip', '2 Avenue de la Gare', '32700', 'Lectoure', '+33 0562685542'),
-                     ('Zentier', '2217 Oceanic Industrial Centre, 2 Lee Lok Street', null, 'Ap Lei Chau', '+852 67527791'),
-                     ('Alba','1-26-1, Ginza, Chuo-Ku', '104-8110', 'Tokyo', '+81 3 35632111'),
-                     ('Casio', '6-2, Hon-machi 1-chome, Shibuya-ku', '151-8543', 'Tokyo', '+81 3 5334 4111');
+INSERT INTO `marque` (`libelle`)
+              VALUES ('KUOE KYOTO'), 
+                     ('Orient'),
+                     ('MDT'),
+                     ('Seiko'),
+                     ('Lip'),
+                     ('Zentier'),
+                     ('Alba'),
+                     ('Casio');
 
 INSERT INTO `genre` (`libelle`) VALUES  ('Homme'), ('Femme'), ('Mixte');
 INSERT INTO `couleur` (`libelle`) VALUES ('Noir'), ('Blanc'), ('Bleu'), ('Argent'), ('Crème/Ivoire'), ('Vert'), ('Rouge'), ('Turquoise'), ('Blanc crème'), ('Squelette'), ('Rose'), ('Or');
@@ -302,35 +281,10 @@ INSERT INTO `client` (`nom`,`prenom`,`mail`,`mdp`,`telephone`,`adresse`,`cp`, `v
 VALUES ('MORABET', 'Abdelmoumen', 'abdelmoumen.morabet@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 1),
        ('HAKIMI', 'Achraf', 'achraf.hakimi@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 3),
        ('CURIE', 'Marie', 'marie.currie@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 3),
-       ('RONALDO', 'Cristiano', 'cristiano.ronaldo@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 3),
-       ('AKROUR', 'Nordine', 'akrour.nordine@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 2);
+       ('RONALDO', 'Cristiano', 'cristiano.ronaldo@gmail.com', '$2y$10$yvRdbt6lGNe9XVXv7IXsEuWlSKUc5UlI7ADrE5DETW/NBfWVA037O', null, null, null, null, 1, 3);
 
-
-INSERT INTO `commande` (`dateCmd`, `idStatut`, `idTransporteur`, `idClient`) VALUES (now(), 1, null, 1);
-
-INSERT INTO `commande` (`dateCmd`, `idStatut`, `idTransporteur`, `idClient`) 
-VALUES (now(), 1, null, 1),
-       ('2023-11-17', 3, 3, 2),
-       ('2023-12-25', 5, 4, 4),
-       ('2021-07-14', 6, 1, 3);
-
-INSERT INTO `details_montre` (`idCommande`, `idMontre`, `qte`) 
-VALUES (1, 1, 1),
-       (2, 16, 6),
-       (2, 7, 2),
-       (3, 18, 1),
-       (3, 6, 5),
-       (4, 11, 1),
-       (4, 20, 3),
-       (4, 15, 65);
-
-INSERT INTO `changement_statut` (`idCommande`, `idStatut`, `dateChangement`) 
-VALUES (2, 2, '2023-11-18'),
-       (2, 3, '2023-11-18'),
-       (3, 2, '2023-12-26'),
-       (3, 3, '2023-12-26'),
-       (3, 4, '2023-12-27'),
-       (3, 5, '2023-12-28'),
-       (4, 2, '2021-07-15'),
-       (4, 3, '2021-07-15'),
-       (4, 6, '2021-07-16');
+INSERT INTO `commande` (`dateCmd`, `idStatut`, `idClient`)
+VALUES (NOW(), 1, 1),
+       (NOW(), 1, 2),
+       (NOW(), 1, 3),
+       (NOW(), 1, 4);
