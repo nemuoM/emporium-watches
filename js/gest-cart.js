@@ -15,7 +15,11 @@ function deleteMontre(idM) {
         });
 }
 
-function addQte(id) {
+function addQte(id, qte, stock) {
+    if (qte >= stock) {
+        alert("Stock insuffisant");
+        return;
+    }
     fetch("addQte/" + id + "/", {
         method: "GET",
     })
