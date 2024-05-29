@@ -69,7 +69,7 @@ function afficheCart() {
                                                 <button
                                                     id="increment"
                                                     class="quantity-btn increment-btn"
-                                                    onclick="addQte(${data[i].idMontre})"
+                                                    onclick="addQte(${data[i].idMontre}, ${data[i].qte}, ${data[i].stock})"
                                                 >
                                                     <img
                                                         class="moins"
