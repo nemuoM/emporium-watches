@@ -47,21 +47,18 @@ class ClientController extends Controller {
      * @param array $params Les paramètres à passer à la vue.
      */
     public static function seconnecter($params){
-        $message = '';
-
         if(isset($_POST['identifiant']) && !empty($_POST['identifiant']) && isset($_POST['mdp']) && !empty($_POST['mdp'])){
             $identifiant = self::nettoyer($_POST['identifiant']);
             $mdp = self::nettoyer($_POST['mdp']);
 
             $message = ClientManager::connexion($identifiant, $mdp);
-        } else {
-            $message = 'Veuillez remplir tous les champs';
+            if($message === 'Connexion réussie'){
+            echo json_encode(['success' => 'Profil mis à jour avec succès !']);
+            } else {
+            echo json_encode(['error' => 'Échec de la connexion. Veuillez vérifier vos identifiants.']);
+            }
         }
 
-        $view = ROOT.'/view/espace-membre.php';
-        $params = array();
-        $params['message'] = $message;
-        self::render($view, $params);
     }
 
     /**
