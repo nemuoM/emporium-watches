@@ -33,9 +33,14 @@ function DetailMontre(id) {
                 </p>
                 <h4>${data[0].prix} €</h4>
                 <div class="d-grid gap-2">
-                    <button class="btn" type="button" onclick="redirectToMemberSpace()">
+                    ${
+                        data[0].stock !== 0
+                            ? `<button class="btn" type="button" onclick="addToCart(${data[0].idMontre})">
                         Ajouter  au panier
-                    </button>
+                    </button>`
+                            : `<button class="btn btn-danger" type="button" disabled>
+                        Rupture de stock</button>`
+                    }
                 </div>
             </div>
         </div>`;
