@@ -5,6 +5,17 @@ RewriteEngine on
 # map neat URL to internal URL
 RewriteRule ^info/$     index.php?controller=view&action=information [nc]
 
+RewriteRule ^mentions-legales/$     index.php?controller=view&action=mentions [nc]
+
+RewriteRule ^meilleurs-ventes/$     index.php?controller=view&action=meilleurs [nc]
+RewriteRule ^meilleurs-ventes/affiche/$     index.php?controller=montre&action=meilleursMontres [nc]
+
+RewriteRule ^nouveau-arrivant/$     index.php?controller=view&action=nouveau [nc]
+RewriteRule ^nouveau-arrivant/affiche/$     index.php?controller=montre&action=nouvellesMontres [nc]
+
+RewriteRule ^survivantes/$     index.php?controller=view&action=survivantes [nc]
+RewriteRule ^survivantes/affiche/$     index.php?controller=montre&action=survivantes [nc]
+
 RewriteRule ^search/$     index.php?controller=montre&action=search [nc]
 
 RewriteRule ^panier/$   index.php?controller=view&action=panier [nc]
@@ -23,6 +34,7 @@ RewriteRule ^espace-membre/inscription/$   index.php?controller=client&action=in
 RewriteRule ^espace-membre/login/$    index.php?controller=client&action=seconnecter [nc]
 
 RewriteRule ^login/$    index.php?controller=client&action=seconnecter [nc]
+RewriteRule ^inscription/$    index.php?controller=client&action=inscription [nc]
 RewriteRule ^deconnexion/$   index.php?controller=client&action=deconnexion [nc]
 
 RewriteRule ^profil/$   index.php?controller=view&action=monProfil [nc]
@@ -45,11 +57,14 @@ RewriteRule ^paiement/valider/$    index.php?controller=cart&action=livraisonpai
 
 RewriteRule ^recapitulatif/$    index.php?controller=view&action=recapitulatif [nc]
 RewriteRule ^recapitulatif/watchrecap/$    index.php?controller=cart&action=getConfirmedCart [nc]
-
 RewriteRule ^recapitulatif/cancel/$    index.php?controller=cart&action=cancelCart [nc]
 
 RewriteRule ^profil/affiche/$    index.php?controller=profil&action=getCmd [nc]
 RewriteRule ^profil/updtprofil/$    index.php?controller=profil&action=updtProfil [nc]
+RewriteRule ^profil/macmd/([0-9]+)/$    index.php?controller=profil&action=affiche [nc]
+RewriteRule ^profil/macmd/([0-9]+)/cmdrecap/([0-9]+)/$    index.php?controller=cart&action=getCmd&id=$1 [nc,qsa]
+RewriteRule ^profil/macmd/([0-9]+)/cancel/([0-9]+)/$$    index.php?controller=cart&action=cancelCmd&id=$1 [nc,qsa]
+RewriteRule ^profil/supprimer/$    index.php?controller=profil&action=supprimer [nc]
 
 RewriteRule ^admin/$    index.php?controller=view&action=backOffice [nc]
 RewriteRule ^admin/marque/$       index.php?controller=montre&action=afficheMarque [nc]
