@@ -17,7 +17,7 @@ function afficheCmd() {
             if (data && data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
                     array.innerHTML += `<div class="card">
-                        <a href="">
+                        <a href="macmd/${data[i].idCommande}/">
                             <div class="card-body">
                                 <h5 class="card-title">Commande n°${
                                     data[i].idCommande
