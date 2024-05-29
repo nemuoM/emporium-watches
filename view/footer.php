@@ -23,16 +23,13 @@
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                         <h5 class="text-uppercase">Contact</h5>
                         <ul class="list-unstyled">
-                            <li><a href="#!" class="text-white">+33 4 23 45 67 89</a></li>
-                            <li><a href="#!" class="text-white">info@emporiumwatches.com</a></li><br>
-                            <li><a href="#!" class="text-white">Montpellier, France</a></li>
+                            <li>info@emporiumwatches.com</li><br>
+                            <li>Montpellier, France</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-                © 2024 Emporium Watches
-            </div>
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)"><a href="<?= SERVER_URL ?>/mentions-legales/" style="color: white;">© 2024 Emporium Watches</a></div>
         </footer>
     </body>
 </html>
