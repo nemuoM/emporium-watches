@@ -256,6 +256,18 @@ class MontreController extends Controller{
         }
     }
 
+    public static function meilleursMontres($params){
+        echo ProductManager::getMeilleursMontres();
+    }
+
+    public static function nouvellesMontres($params){
+        echo ProductManager::getNouvellesMontres();
+    }
+
+    public static function survivantes($params){
+        echo ProductManager::getSurvivantes();
+    }
+
 }
 
 ?>
