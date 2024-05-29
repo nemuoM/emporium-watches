@@ -14,7 +14,7 @@
 <div class="formulaire">
     <img src="<?= SERVER_URL ?>/img/EW-form.png" alt="photo du formulaire" />
     <div id="form">
-        <form method="post" action="<?= SERVER_URL?>/login/" >
+        <form id="connexion">
             <div class="container mignon" id="form-content">
                 <div class="form-floating mb-3 formi">
                     <input
@@ -46,6 +46,9 @@
 </div>
 
 <script src="<?= SERVER_URL ?>/js/membre.js"></script>
+<script>
+
+</script>
 <?php if(isset($message)) {?>
     <script>showError("<?= $message ?>");</script>
 <?php
