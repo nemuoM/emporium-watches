@@ -71,7 +71,7 @@ class ClientManager
                     $_SESSION['idRole'] = $role;
                     CartManager::syncCart($id);
 
-                    header('Location: ' . SERVER_URL);
+                    $message = 'Connexion réussie';
                 } else {
                     // Message d'erreur de connexion
                     $message = 'L\'adresse e-mail ou le mot de passe est incorrect';
@@ -261,6 +261,26 @@ class ClientManager
             die('Erreur : '. $e->getMessage());
         }finally{
             unset($cnx);
+        }
+    }
+
+    public static function deleteClient($id)
+    {
+        try {
+            if (self::$cnx == null) {
+                self::$cnx = DbManager::getConnexion();
+            }
+
+            $sql = 'DELETE FROM client WHERE idClient = :id';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+            $stmt->execute();
+
+            unset($cnx);
+        } catch (PDOException $e) {
+            die('Erreur : ' . $e->getMessage());
         }
     }
 }
