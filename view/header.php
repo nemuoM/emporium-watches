@@ -23,7 +23,6 @@
     <div class="divbar mars">
         <form class="d-flex espace" role="search">
             <input class="form-control me-2 rech" type="search" placeholder="Rechercher" aria-label="Search" onkeyup="Search(this.value)">
-            <button class="gnonmi pioupiou" type="submit">Rechercher</button>
         </form>
         <div id="resultat-recherche" class="resultatR">
             
