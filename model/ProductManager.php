@@ -269,7 +269,7 @@
             if (self::$cnx == null) {
                 self::$cnx = DbManager::getConnexion();
             }
-            $sql = 'SELECT idMontre, nom FROM montre WHERE nom LIKE :s;';
+            $sql = 'SELECT idMontre, nom FROM montre MO JOIN marque MA on MO.idMarque = MA.idMarque WHERE nom LIKE :s OR MA.libelle LIKE :s';
             
             $stmt = self::$cnx->prepare($sql);
             $stmt->bindValue(':s', $search, PDO::PARAM_STR);
@@ -449,6 +449,78 @@
         }finally{
             unset($cnx);
         }
+    }
+
+    public static function getMeilleursMontres(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'SELECT MO.idMontre, MO.image, MO.nom, MO.prix, MO.stock, MA.libelle AS marque FROM montre MO JOIN marque MA ON MO.idMarque = MA.idMarque JOIN details_montre DM ON MO.idMontre = DM.idMontre GROUP BY MO.idMontre ORDER BY COUNT(DM.idMontre) DESC LIMIT 5;';
+
+            $stmt = self::$cnx->query($sql);
+
+            $data = null;
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $data[] = $row;
+            }
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+
+        return json_encode($data);
+    }
+
+    public static function getNouvellesMontres(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'SELECT idMontre, image, nom, prix, stock, MA.libelle AS marque FROM montre MO JOIN marque MA on MO.idMarque = MA.idMarque ORDER BY dateAjout DESC LIMIT 5;';
+
+            $stmt = self::$cnx->query($sql);
+
+            $data = null;
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $data[] = $row;
+            }
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+
+        return json_encode($data);
+    }
+
+    public static function getSurvivantes(){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+            $sql = 'SELECT idMontre, image, nom, prix, stock, MA.libelle AS marque FROM montre MO JOIN marque MA on MO.idMarque = MA.idMarque WHERE stock > 0 AND stock <= 5 ORDER BY stock ASC;';
+
+            $stmt = self::$cnx->query($sql);
+
+            $data = null;
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $data[] = $row;
+            }
+            
+        }catch (PDOException $e) {
+            die('Erreur : '. $e->getMessage());
+        }finally{
+            unset($cnx);
+        }
+
+        return json_encode($data);
     }
 }
 
