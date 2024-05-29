@@ -24,7 +24,7 @@ class CartManager{
             }
             $idCo = $_SESSION['idCommande'];
 
-            $sql = 'SELECT DM.idMontre, image, nom, prix, stock, qte, MA.libelle AS marque FROM montre MO ';
+            $sql = 'SELECT DM.idMontre, image, nom, prix, MO.stock, qte, MA.libelle AS marque FROM montre MO ';
             $sql .= 'JOIN marque MA on MO.idMarque = MA.idMarque ';
             $sql .= 'JOIN details_montre DM on MO.idMontre = DM.idMontre ';
             $sql .= 'JOIN commande CO on DM.idCommande = CO.idCommande ';
@@ -90,7 +90,7 @@ class CartManager{
             }
             $id = $_SESSION['idClient'];
 
-            $sql = 'INSERT INTO `commande`(dateCmd, idstatut, idTransporteur, idClient) VALUES (NOW(), 1, null,:idC)';
+            $sql = 'INSERT INTO `commande`(dateCmd, idstatut, idClient) VALUES (NOW(), 1, :idC)';
 
             $stmt = self::$cnx->prepare($sql);
             $stmt->bindParam(':idC', $id, PDO::PARAM_INT);
@@ -230,22 +230,21 @@ class CartManager{
     }
 
     /**
-     * Définit le transporteur de la commande
-     * 
-     * @param int $idTransporteur
-     * @return bool
+     * Annule le panier en mettant à jour le statut de la commande.
+     *
+     * @return bool Retourne true si la mise à jour a réussi, sinon false.
+     * @throws PDOException En cas d'erreur lors de l'exécution de la requête SQL.
      */
-    public static function setTransporteur($idTransporteur){
+    public static function cancelCart(){
         try{
             if(self::$cnx == null){
                 self::$cnx = DbManager::getConnexion();
             }
-            $id = $_SESSION['idCommande'];
+            $id = $_SESSION['idCommandeC'];
 
-            $sql = 'UPDATE commande SET idTransporteur = :idT WHERE idCommande = :idC';
+            $sql = 'UPDATE commande SET idStatut = 6 WHERE idCommande = :idC';
 
             $stmt = self::$cnx->prepare($sql);
-            $stmt->bindParam(':idT', $idTransporteur, PDO::PARAM_INT);
             $stmt->bindParam(':idC', $id, PDO::PARAM_INT);
 
             if($stmt->execute()){
@@ -261,18 +260,11 @@ class CartManager{
         }
     }
 
-    /**
-     * Annule le panier en mettant à jour le statut de la commande.
-     *
-     * @return bool Retourne true si la mise à jour a réussi, sinon false.
-     * @throws PDOException En cas d'erreur lors de l'exécution de la requête SQL.
-     */
-    public static function cancelCart(){
+    public static function cancelCmd($id){
         try{
             if(self::$cnx == null){
                 self::$cnx = DbManager::getConnexion();
             }
-            $id = $_SESSION['idCommandeC'];
 
             $sql = 'UPDATE commande SET idStatut = 6 WHERE idCommande = :idC';
 
@@ -340,6 +332,38 @@ class CartManager{
             $sql .= 'JOIN details_montre DM on MO.idMontre = DM.idMontre ';
             $sql .= 'JOIN commande CO on DM.idCommande = CO.idCommande ';
             $sql .= 'WHERE CO.idCommande = :idCo AND CO.idStatut = 2;';
+
+            $stmt = self::$cnx->prepare($sql);
+            $stmt->bindParam(':idCo', $id);
+            $stmt->execute();
+
+            $data = null;
+
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                $data[] = $row;
+            }
+
+        }catch(PDOException $e){
+            die('Erreur : ' . $e->getMessage());
+        }
+        finally{
+            unset($cnx);
+        }
+
+        return json_encode($data);  
+    }
+
+    public static function getCmd($id){
+        try{
+            if(self::$cnx == null){
+                self::$cnx = DbManager::getConnexion();
+            }
+
+            $sql = 'SELECT CO.idStatut, image, nom, prix, qte, MA.libelle AS marque FROM montre MO ';
+            $sql .= 'JOIN marque MA on MO.idMarque = MA.idMarque ';
+            $sql .= 'JOIN details_montre DM on MO.idMontre = DM.idMontre ';
+            $sql .= 'JOIN commande CO on DM.idCommande = CO.idCommande ';
+            $sql .= 'WHERE CO.idCommande = :idCo;';
 
             $stmt = self::$cnx->prepare($sql);
             $stmt->bindParam(':idCo', $id);
