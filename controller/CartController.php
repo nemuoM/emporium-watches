@@ -83,10 +83,26 @@ class CartController extends Controller {
         }
     }
 
+    public static function cancelCmd($params){
+        if($_SERVER['REQUEST_METHOD'] === 'GET'){
+            $id = isset($_GET['id']) ? $_GET['id'] : '';
+            header('Content-Type: application/json');
+            echo CartManager::cancelCmd($id);
+        }
+    }
+
     public static function getConfirmedCart($params){
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             header('Content-Type: application/json');
             echo CartManager::getConfirmedCart();
+        }
+    }
+
+    public static function getCmd($params){
+        if($_SERVER['REQUEST_METHOD'] === 'GET'){
+            $id = isset($_GET['id']) ? $_GET['id'] : '';
+            header('Content-Type: application/json');
+            echo CartManager::getCmd($id);
         }
     }
 }
