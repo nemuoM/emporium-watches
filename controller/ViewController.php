@@ -73,4 +73,28 @@ class ViewController extends Controller {
         $params = array();
         self::render($view, $params);
     }
+
+    public static function meilleurs($params){
+        $view = ROOT.'/view/meilleurs-ventes.php';
+        $params = array();
+        self::render($view, $params);
+    }
+
+    public static function nouveau($params){
+        $view = ROOT.'/view/nouvelle-arrivante.php';
+        $params = array();
+        self::render($view, $params);
+    }
+
+    public static function survivantes($params){
+        $view = ROOT.'/view/survivantes.php';
+        $params = array();
+        self::render($view, $params);
+    }
+
+    public static function mentions($params){
+        $view = ROOT.'/view/mentions-legale.php';
+        $params = array();
+        self::render($view, $params);
+    }
 } 
