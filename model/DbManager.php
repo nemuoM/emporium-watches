@@ -11,8 +11,8 @@ const HOST = '127.0.0.1';
 const PORT = '3307';
 const DBNAME = 'db_emporium';
 const CHARSET = 'utf8';
-const LOGIN = 'root';
-const MDP = '';
+const LOGIN = 'emporium';
+const MDP = 'DumB0__2500!';
 
 class DbManager
 {
