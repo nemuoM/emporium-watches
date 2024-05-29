@@ -110,8 +110,13 @@ li {
 }
 
 .rech {
-    width: 60%;
+    width: 800px;
     max-width: 200px;
+}
+
+.pagespe {
+    margin-top: 52px;
+    font-family: "Conso";
 }
 
 .gnonmi {
