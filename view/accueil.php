@@ -10,19 +10,19 @@
 </div>
 
 <div class="one">
-    <a href="<?= SERVER_URL ?>/montres/">
+    <a href="<?= SERVER_URL ?>/nouveau-arrivant/">
         <img src="<?= SERVER_URL ?>/img/LES-NOUVEAUX-ARRIVANTS.png" alt="nouvelles-montres" />
     </a>
 </div>
 
 <div class="two">
-    <a href="<?= SERVER_URL ?>/montres/">
+    <a href="<?= SERVER_URL ?>/meilleurs-ventes/">
         <img src="<?= SERVER_URL ?>/img/LES-MEILLEURS-VENTES.png" alt="nouvelles-montres" />
     </a>
 </div>
 
 <div class="three">
-    <a href="<?= SERVER_URL ?>/montres/">
+    <a href="<?= SERVER_URL ?>/survivantes/">
         <img src="<?= SERVER_URL ?>/img/LES-SURVIVANTES.png" alt="nouvelles-montres" />
     </a>
 </div>
