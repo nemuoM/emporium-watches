@@ -50,7 +50,7 @@ function AfficherMontre(filtres) {
                                 </div>`;
                 }
             } else {
-                afficher.innerHTML += `<h1 class="rien"> Il n'y a pas de produit qui correspond à ce filtre.</h1>`;
+                afficher.innerHTML += `<h1 class="rien">Aucun produit correspondant.</h1>`;
                 console.error(
                     "La requête ne comporte aucun éléments à afficher."
                 );
