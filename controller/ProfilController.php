@@ -46,6 +46,24 @@ class ProfilController extends Controller {
             }
         }
     }
+
+    public static function affiche(){
+        $view = ROOT.'/view/macommande.php';
+        $params = array();
+        self::render($view, $params);
+    }
+
+    public static function supprimer($params){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+            if(password_verify($_POST['password'], $_SESSION['mdp'])){
+                ClientManager::deleteClient($_SESSION['idClient']);
+                session_destroy();
+                echo json_encode(['success' => 'Compte supprimé avec succès !']);
+            } else {
+                echo json_encode(['error' => 'Mot de passe incorrect !']);
+            }
+        }
+    }
     
 }
 
