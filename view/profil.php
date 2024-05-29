@@ -2,6 +2,10 @@
 $title = 'Mon Profil';
 require_once 'header.php'; // Inclusion de l'en-tête
 
+if (!isset($_SESSION['idClient'])) {
+    header('Location: ' . SERVER_URL);
+}
+
 ?>
 
 <link rel="stylesheet" href="<?= SERVER_URL ?>/css/espace.css">
@@ -13,6 +17,33 @@ require_once 'header.php'; // Inclusion de l'en-tête
     <?php } ?>
     <a href="<?= SERVER_URL ?>/deconnexion/" class="btn btn-danger deco">Déconnexion</a>
     
+     <!-- Modal -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmation de suppression du compte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.
+                    <form id="delete">
+                        <div class="form-group">
+                            <label for="password">Mot de passe:</label>
+                            <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button id="deltebtn" type="button" class="btn btn-danger">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6">
             <!-- Informations du profil -->
@@ -62,8 +93,7 @@ require_once 'header.php'; // Inclusion de l'en-tête
                 </div>
                 <button type="submit" class="btn btn-primary modif">Modifier mes informations</button>
             </form>
-            <a href="<?= SERVER_URL ?>/accueil/" class="btn btn-warning modif">Supprimer mon compte</a>
-            <!-- Add more profile information here if needed -->
+            <button class="btn btn-warning modif" data-toggle="modal" data-target="#confirmDeleteModal">Supprimer mon compte</button>            <!-- Add more profile information here if needed -->
             
         </div>
         <div class="col-md-6">
