@@ -184,3 +184,29 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("#connexion");
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const formData = new FormData(form);
+        // Vérification que tous les champs sont renseignés
+        if (formData.get("identifiant") === "" || formData.get("mdp") === "") {
+            alert("Veuillez remplir tous les champs");
+            return;
+        }
+        fetch("login/", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success === undefined) {
+                    alert(data.error);
+                } else {
+                    window.location.href = "../../../../";
+                }
+            });
+    });
+});
