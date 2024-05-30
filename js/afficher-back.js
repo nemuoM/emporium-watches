@@ -27,7 +27,6 @@ function AfficherMontre() {
                         <td>${data[i].stock}</td>
                         <td>
                             <buton class="btn btn-warning" data-toggle="modal" data-target="#montreModal" onclick="rempFormMontre(${data[i].idMontre})">Modifier</buton>
-                            <a class="btn btn-danger">Supprimer</a>
                         </td>
                     </tr>`;
                 }
