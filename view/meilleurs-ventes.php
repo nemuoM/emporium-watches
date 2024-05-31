@@ -14,7 +14,7 @@ require_once 'header.php'; // Inclusion de l'en-tête
 </div>
 
 <div class="container center pdts mx-auto">
-    <h1 class="pagespe">Les nouveaux arrivants</h1>
+    <h1 class="pagespe">Les meilleurs ventes</h1>
     <div class="affichepdt" id="mesProd">
         <!-- Affichage de mes produits -->
     </div>
