@@ -15,7 +15,6 @@ DROP TABLE IF EXISTS `details_montre`;
 DROP TABLE IF EXISTS `changement_statut`;
 DROP TABLE IF EXISTS `commande`;
 DROP TABLE IF EXISTS `statut`;
-DROP TABLE IF EXISTS `avis`;
 DROP TABLE IF EXISTS `client`;
 DROP TABLE IF EXISTS `roles`;
 DROP TABLE IF EXISTS `montre`;
@@ -112,16 +111,6 @@ CREATE TABLE IF NOT EXISTS `client`(
   FOREIGN KEY (`idGenre`) REFERENCES  `genre`(`idGenre`),
   FOREIGN KEY (`idRole`) REFERENCES  `roles`(`idRole`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-CREATE TABLE IF NOT EXISTS `avis`(
-  `idClient` integer NOT NULL,
-  `idMontre` integer NOT NULL, 
-  `nbEtoile` integer NOT NULL,
-  `description` varchar(130),
-  CONSTRAINT `pk_avis` PRIMARY KEY (`idClient`,`idMontre`),
-  FOREIGN KEY (`idClient`) REFERENCES  `client`(`idClient`),
-  FOREIGN KEY (`idMontre`) REFERENCES  `montre`(`idMontre`)
-)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS `statut` (
   `idStatut` integer NOT NULL AUTO_INCREMENT,
