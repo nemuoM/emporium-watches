@@ -18,7 +18,7 @@ require_once 'header.php'; // Inclusion de l'en-tête
     <h2>Respect du RGPD</h2>
     <p>Nous respectons le Règlement Général sur la Protection des Données (RGPD) et nous nous engageons à protéger vos données personnelles. Nous collectons et traitons vos données de manière transparente, sécurisée et dans le respect de vos droits.</p>
     <p>Pour plus d'informations sur la collecte et l'utilisation de vos données, veuillez consulter notre politique de confidentialité. Vous y trouverez des détails sur les types de données que nous collectons, les finalités de leur traitement, ainsi que vos droits en matière de protection des données et comment les exercer.</p>
-    <p>Si vous avez des questions concernant notre politique de confidentialité ou la gestion de vos données personnelles, vous pouvez nous contacter à l'adresse suivante : [votre adresse email de contact].</p>
+    <p>Si vous avez des questions concernant notre politique de confidentialité ou la gestion de vos données personnelles, vous pouvez nous contacter à l'adresse suivante : info@emporiumwatches.com.</p>
         
     <p>En utilisant notre Site, vous consentez à notre politique de confidentialité et à notre utilisation des cookies conformément à cette politique. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre Site.</p>
 </div>
