@@ -49,8 +49,8 @@
 .cross-icon {
     position: absolute;
     position: relative;
-    width: 15px; /* ou la taille souhaitée */
-    height: 15px; /* ou la taille souhaitée */
+    width: 15px;
+    height: 15px;
 }
 .cross-button {
     background-color: transparent;
@@ -78,12 +78,12 @@
 }
 
 .order-summary {
-    width: 660px; /* Réduisez la largeur selon vos besoins */
+    width: 660px;
     height: 170px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-left: 20px; /* Espacement entre les produits et le résumé de la commande */
+    margin-left: 20px;
 }
 
 #total-amount {

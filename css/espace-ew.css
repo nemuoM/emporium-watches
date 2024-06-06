@@ -1,27 +1,22 @@
 .formulaire {
     position: relative;
     display: inline-block;
-    width: 100%; /* Ajouté pour s'assurer que .formulaire occupe toute la largeur */
+    width: 100%;
 }
 
 .formulaire img {
     width: 100%;
-    display: block; /* Assurez-vous que l'image n'a pas d'espace autour d'elle */
+    display: block;
 }
 
 .mignon {
-    position: absolute; /* Positionnement absolu par rapport à .formulaire */
-    top: 40%; /* Ajustement pour centrer verticalement */
-    left: 30%; /* Ajustement pour centrer horizontalement */
-    transform: translate(-50%, -50%); /* Ajustement pour centrer précisément */
-    background-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Utilisation de RGBA pour l'opacité */
-    width: 650px; /* Largeur fixe, ajustez selon vos besoins */
-    padding: 50px 50px 20px; /* Padding ajusté */
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 650px;
+    padding: 50px 50px 20px;
     border-radius: 45px;
     border-style: groove;
     border-color: #e0cda9;
