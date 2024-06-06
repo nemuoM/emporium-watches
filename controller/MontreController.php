@@ -64,6 +64,12 @@ class MontreController extends Controller{
         }
     }
 
+    /**
+     * Traite une requête GET pour afficher toutes les montres disponibles.
+     * Utilise ProductManager::getLesMontres pour récupérer et afficher les montres au format JSON.
+     * 
+     * @param array $params Paramètres inutilisés dans cette fonction.
+     */
     public static function afficheMontre($params){
         if ($_SERVER['REQUEST_METHOD'] === 'GET'){
             echo ProductManager::getLesMontres(null);
@@ -137,6 +143,12 @@ class MontreController extends Controller{
         }
     }
 
+    /**
+     * Nettoie les données reçues pour éviter les failles XSS.
+     * 
+     * @param string $data Les données à nettoyer.
+     * @return string Les données nettoyées.
+     */
     public static function nettoyer($data){
         $data = trim($data);
         $data = stripslashes($data);
@@ -165,6 +177,13 @@ class MontreController extends Controller{
         }
     }
 
+    /**
+     * Traite une requête POST pour ajouter une montre à la base de données.
+     * Récupère les données envoyées via une requête POST et les transmet à ProductManager::setMontre.
+     * Répond avec un message de succès au format JSON.
+     * 
+     * @param array $params Paramètres inutilisés dans cette fonction.
+     */
     public static function ajoutMontre(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             $idMarque = isset($_POST['marque']) ? $_POST['marque'] : '';
@@ -192,6 +211,13 @@ class MontreController extends Controller{
         }
     }
 
+    /**
+     * Traite une requête POST pour ajouter un libellé à la base de données.
+     * Récupère les données envoyées via une requête POST et les transmet à ProductManager::setLibelle.
+     * Répond avec un message de succès au format JSON.
+     * 
+     * @param array $params Paramètres inutilisés dans cette fonction.
+     */
     public static function ajoutLibelle(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             $type = isset($_POST['type']) ? $_POST['type'] : '';
@@ -227,6 +253,13 @@ class MontreController extends Controller{
         }
     }
 
+    /**
+     * Traite une requête POST pour modifier une montre dans la base de données.
+     * Récupère les données envoyées via une requête POST et les transmet à ProductManager::updateMontre.
+     * Répond avec un message de succès au format JSON.
+     * 
+     * @param array $params Paramètres inutilisés dans cette fonction.
+     */
     public static function modifMontre(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             $id = isset($_POST['id']) ? $_POST['id'] : '';
@@ -256,6 +289,7 @@ class MontreController extends Controller{
         }
     }
 
+    
     public static function meilleursMontres($params){
         echo ProductManager::getMeilleursMontres();
     }

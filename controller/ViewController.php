@@ -50,24 +50,36 @@ class ViewController extends Controller {
         self::render($view, $params);
     }
 
+    /**
+     * Action qui affiche la page panier.
+     */
     public static function panier($params){
         $view = ROOT.'/view/panier.php';
         $params = array();
         self::render($view, $params);
     }
 
+    /**
+     * Action qui affiche la page de paiement.
+     */
     public static function paiement($params){
         $view = ROOT.'/view/paiement.php';
         $params = array();
         self::render($view, $params);
     }
 
+    /**
+     * Action qui affiche la page de récapitulatif de commande.
+     */
     public static function recapitulatif($params){
         $view = ROOT.'/view/recapitulatif.php';
         $params = array();
         self::render($view, $params);
     }
 
+    /**
+     * Action qui affiche la page back-office du site.
+     */
     public static function backOffice($params){
         $view = ROOT.'/view/back-office.php';
         $params = array();

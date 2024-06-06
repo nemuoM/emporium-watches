@@ -260,6 +260,12 @@ class CartManager{
         }
     }
 
+    /**
+     * Annule une commande en mettant à jour le statut de la commande.
+     * 
+     * @param int $id
+     * @return bool
+     */
     public static function cancelCmd($id){
         try{
             if(self::$cnx == null){
@@ -320,6 +326,11 @@ class CartManager{
         }
     }
 
+    /**
+     * Récupère le contenu du panier confirmé
+     * 
+     * @return json
+     */
     public static function getConfirmedCart(){
         try{
             if(self::$cnx == null){
@@ -353,6 +364,12 @@ class CartManager{
         return json_encode($data);  
     }
 
+    /**
+     * Récupère une commande et ses détails ainsi que le statut de la commande
+     * 
+     * @param int $id
+     * @return json
+     */
     public static function getCmd($id){
         try{
             if(self::$cnx == null){
@@ -385,7 +402,11 @@ class CartManager{
         return json_encode($data);  
     }
 
-
+    /**
+     * Récupère le nombre de commandes en cours
+     * 
+     * @return int
+     */
     public static function getNbCmd(){
         try{
             if(self::$cnx == null){

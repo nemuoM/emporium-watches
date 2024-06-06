@@ -363,6 +363,13 @@
         }
     }
 
+    /**
+     * Insérez une nouvelle marque, genre, couleur, style, mouvement ou matière dans la base de données.
+     *
+     * @param string $type Le type de données à insérer (marque, genre, couleur, style, mouvement, matiere).
+     * @param string $libelle Le libellé de la nouvelle entrée.
+     * @return void
+     */
     public static function setLibelle($type, $libelle){
         try{
             if(self::$cnx == null){
@@ -405,6 +412,9 @@
         }
     }
 
+    /**
+     * Récupère et renvoie une liste de commandes en fonction de l'ID du client.
+     */
     public static function getCommande(){
         try{
             if(self::$cnx == null){
@@ -431,6 +441,9 @@
         return json_encode($data);
     }
 
+    /**
+     * Renvoie le nombre total de montres dans la base de données.
+     */
     public static function getNombreMontre(){
         try{
             if(self::$cnx == null){
@@ -451,6 +464,9 @@
         }
     }
 
+    /**
+     * Renvoie les montres les plus populaires.
+     */
     public static function getMeilleursMontres(){
         try{
             if(self::$cnx == null){
@@ -475,6 +491,9 @@
         return json_encode($data);
     }
 
+    /**
+     * Renvoie les montres les plus récentes.
+     */
     public static function getNouvellesMontres(){
         try{
             if(self::$cnx == null){
@@ -499,6 +518,9 @@
         return json_encode($data);
     }
 
+    /**
+     * Renvoie les montres avec le stock le plus faible.
+     */
     public static function getSurvivantes(){
         try{
             if(self::$cnx == null){

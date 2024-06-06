@@ -52,6 +52,12 @@ class CartController extends Controller {
         }
     }
 
+    /**
+     * Permet d'ajouter un produit au panier.
+     * 
+     * @param string $data Les données à ajouter.
+     * @return string Les données ajoutées.
+     */
     public static function addCart($params){
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -60,6 +66,12 @@ class CartController extends Controller {
         }
     }
 
+    /**
+     * Permet d'incrémenter la quantité d'un produit dans le panier.
+     * 
+     * @param string $data Les données à incrémenter.
+     * @return string Les données incrémentées.
+     */
     public static function decrQte($params){
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -68,6 +80,12 @@ class CartController extends Controller {
         }
     }
 
+    /**
+     * Permet de décrémenter la quantité d'un produit dans le panier.
+     * 
+     * @param string $data Les données à décrémenter.
+     * @return string Les données décrémentées.
+     */
     public static function delMontre($params){
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -76,6 +94,12 @@ class CartController extends Controller {
         }
     }
 
+    /**
+     * Permet d'annuler le panier.
+     * 
+     * @param string $data Les données à annuler.
+     * @return string Les données annulées.
+     */
     public static function cancelCart($params){
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             header('Content-Type: application/json');
@@ -83,6 +107,12 @@ class CartController extends Controller {
         }
     }
 
+    /**
+     * Permet d'annuler une commande.
+     * 
+     * @param string $data Les données à annuler.
+     * @return string Les données annulées.
+     */
     public static function cancelCmd($params){
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -91,6 +121,12 @@ class CartController extends Controller {
         }
     }
 
+    /**
+     * Permet de récupérer le panier confirmé.
+     * 
+     * @param string $data Les données à récupérer.
+     * @return string Les données récupérées.
+     */
     public static function getConfirmedCart($params){
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             header('Content-Type: application/json');
@@ -98,6 +134,12 @@ class CartController extends Controller {
         }
     }
 
+    /**
+     * Permet de récupérer une commande.
+     * 
+     * @param string $data Les données à récupérer.
+     * @return string Les données récupérées.
+     */
     public static function getCmd($params){
         if($_SERVER['REQUEST_METHOD'] === 'GET'){
             $id = isset($_GET['id']) ? $_GET['id'] : '';

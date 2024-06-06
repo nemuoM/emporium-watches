@@ -213,6 +213,15 @@ class ClientManager
         }
     }
 
+    /**
+     * Met à jour l'adresse d'un client dans la base de données.
+     * 
+     * @param int $id L'identifiant du client.
+     * @param string $adresse La nouvelle adresse du client.
+     * @param string $cp Le nouveau code postal du client.
+     * @param string $ville La nouvelle ville du client.
+     * @param string $telephone Le nouveau numéro de téléphone du client.
+     */
     public static function updateAdresse($id, $adresse, $cp, $ville, $telephone)
     {
         try {
@@ -242,6 +251,9 @@ class ClientManager
         }
     }
 
+    /**
+     * Récupère le nombre de client inscrits dans la base de données.
+     */
     public static function getNbClients()
     {
         try {
@@ -264,6 +276,9 @@ class ClientManager
         }
     }
 
+    /**
+     * Permet de supprimer un client de la base de données.
+     */
     public static function deleteClient($id)
     {
         try {
