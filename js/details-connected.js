@@ -19,7 +19,7 @@ function DetailMontre(id) {
                 console.log(id);
                 afficher.innerHTML = `<div class="col-md-4" width="250px">
             <img
-                src="../../../../img/montre/${data[0].image}"
+                src="${data[0].image}"
                 class="img-montre"
                 alt="${data[0].nom}"
             />

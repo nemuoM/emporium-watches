@@ -34,7 +34,7 @@ function AfficheWatchRecap(id) {
                 // Boucle à travers les données JSON et crée les lignes du tableau
                 for (var i = 0; i < data.length; i++) {
                     array.innerHTML +=
-                        "<td><img class='imgM' src='../../../../img/montre/" +
+                        "<td><img class='imgM' src='" +
                         data[i].image +
                         "'></td>" +
                         "<td>" +

@@ -20,7 +20,7 @@ function AfficherMontre() {
             if (data && data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
                     array.innerHTML += `<tr>
-                        <td><img class="imgM" src="../../../../img/montre/${data[i].image}" alt="${data[i].nom}"></td>
+                        <td><img class="imgM" src="${data[i].image}" alt="${data[i].nom}"></td>
                         <td>${data[i].marque}</td>
                         <td>${data[i].nom}</td>
                         <td>${data[i].prix} €</td>
